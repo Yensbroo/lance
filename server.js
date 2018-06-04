@@ -1,10 +1,8 @@
 const express = require('express');
-const mysql = require('mysql');
 const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-const routes = require('./server/routes');
 
 
 const app = express();
@@ -24,17 +22,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// Routes
-app.use("", routes);
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to Lance'
+}))
 
-
-const hostName = "localhost";
-const port = process.env.PORT || 8000;
-const nodeEnv = (process.env.NODE_ENV) ? process.env.NODE_ENV : 'development';
-if (nodeEnv !== 'production') {
-  console.log('You are on the development server');
-}
-
-app.listen(port, hostName, () => {
-  console.log(`Server started at http://${hostName}:${port}/`);
-})
+module.exports = app;
