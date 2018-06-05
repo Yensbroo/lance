@@ -38,17 +38,22 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    published: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: '1'
+    },
     created_at: {
       type: DataTypes.DATE,
-      allowNull: true
+      defaultValue: DataTypes.NOW
     },
     updated_at: {
       type: DataTypes.DATE,
-      allowNull: true
+      defaultValue: DataTypes.NOW
     },
     published_at: {
       type: DataTypes.DATE,
-      allowNull: false
+      defaultValue: DataTypes.NOW
     },
     deleted_at: {
       type: DataTypes.DATE,

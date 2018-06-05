@@ -2,8 +2,10 @@ const bcrypt = require('bcryptjs');
 const User = require('../models').users;
 const jwt = require('jsonwebtoken');
 const keys = require('../../../config/keys');
+const randomize = require('randomatic');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const send = require('../../../utilities/email_sender').send_email;
 
 exports.create_user = (req, res) => {
   const {
@@ -28,12 +30,17 @@ exports.create_user = (req, res) => {
         })
       }
 
+      const email_token = randomize('Aa0', 25);
+
       User.create({
           name: req.body.name,
           email: req.body.email,
           password: req.body.password,
-          role_id: 2
+          role_id: 2,
+          email_confirmed: false,
+          confirmation_token: email_token
         }).then((user) => {
+          send(user.email, user.confirmation_token);
           res.json(user);
         })
         .catch(err => res.json(err));
@@ -64,6 +71,10 @@ exports.user_login = (req, res) => {
       });
     }
 
+    if (!user.email_confirmed) {
+      res.status(400).json('Please verify your account');
+    }
+
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         jwt.sign({
@@ -92,4 +103,19 @@ exports.get_users = (req, res) => {
     .then((users) => {
       res.send(users);
     })
+}
+
+exports.confirm_user = (req, res, next) => {
+
+  User.update({
+    email_confirmed: true
+  }, {
+    where: {
+      confirmation_token: req.params.id
+    }
+  }).then(() => {
+    res.json({
+      succes: true
+    });
+  })
 }

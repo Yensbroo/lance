@@ -27,6 +27,7 @@ const projectController = require('./controllers/projectController');
 
 router.post('/register', authController.create_user);
 router.post('/login', authController.user_login);
+router.post('/verify/:id', authController.confirm_user);
 
 
 /**
