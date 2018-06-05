@@ -1,10 +1,10 @@
 const express = require('express');
-const mysql = require('mysql');
 const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
-const routes = require('./server/routes');
+const routes = require('./server/routes')
 
 
 const app = express();
@@ -24,17 +24,14 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// Routes
-app.use("", routes);
+//passport middleware
+app.use(passport.initialize());
+
+//passport config
+require('./server/config/passport')(passport);
+
+//Routes 
+app.use('', routes);
 
 
-const hostName = "localhost";
-const port = process.env.PORT || 8000;
-const nodeEnv = (process.env.NODE_ENV) ? process.env.NODE_ENV : 'development';
-if (nodeEnv !== 'production') {
-  console.log('You are on the development server');
-}
-
-app.listen(port, hostName, () => {
-  console.log(`Server started at http://${hostName}:${port}/`);
-})
+module.exports = app;

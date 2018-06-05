@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "echo 'Server started in production mode.' & SET NODE_ENV=production & node server.js",
-    "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & nodemon --config nodemon.json server.js",
+    "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & DEBUG=lance:* nodemon --config nodemon.json ./bin/www",
     "client": "cd lance && ng serve",
     "dev": "concurrently \"yarn start-dev \" \"yarn client\""
   },
@@ -16,6 +16,7 @@
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.1",
     "cors": "^2.8.4",
+    "debug": "^3.1.0",
     "express": "^4.16.3",
     "fs": "^0.0.1-security",
     "morgan": "^1.9.0",
@@ -26,6 +27,7 @@
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
     "sequelize": "^4.37.10",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "validator": "^10.3.0"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "webdev2-user",
+    "password": "webdev2-pass",
+    "database": "webdev2-db",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "webdev2-user",
+    "password": "webdev2-pass",
+    "database": "webdev2-db",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "webdev2-user",
+    "password": "webdev2-pass",
+    "database": "webdev2-db",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
