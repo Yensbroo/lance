@@ -43,6 +43,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     role_id: {
       type: DataTypes.INTEGER(10).UNSIGNED,
       allowNull: false,
@@ -50,6 +54,7 @@ module.exports = function (sequelize, DataTypes) {
         model: 'roles',
         key: 'id'
       },
+
     }
   }, {
     tableName: 'users'

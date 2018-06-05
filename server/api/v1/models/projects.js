@@ -45,7 +45,15 @@ module.exports = function (sequelize, DataTypes) {
     updated_at: {
       type: DataTypes.DATE,
       allowNull: true
-    }
+    },
+    published_at: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
   }, {
     tableName: 'projects'
   }, {
