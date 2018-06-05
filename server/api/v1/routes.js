@@ -1,29 +1,45 @@
 const express = require('express');
 const router = express.Router();
 
+const passport = require('passport');
 
+/**
+ * passport authentication
+ */
+const authenticate = passport.authenticate('jwt', {
+  session: false
+});
 /**
  * Controllers
  */
+const authController = require('./controllers/authController');
 const projectController = require('./controllers/projectController');
+
+/**
+ * Models
+ */
+
 
 
 /**
  * Authentication
  */
 
+router.post('/register', authController.create_user);
+router.post('/login', authController.user_login);
+
+
 /**
  * Projects
  */
 
- // get All projects
-router.get('/projects', projectController.get_projects);
+// get All projects
 
 // get project by id
 router.get('/project/:id', projectController.get_project_by_id)
-
-// get project by user
-
+router.get('/projects', projectController.get_projects)
+router.get('/projects/user', authenticate, projectController.get_projects_by_user);
+router.delete('/project/:id', authenticate, projectController.delete_project);
 
 /**
  * Categories
