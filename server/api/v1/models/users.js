@@ -53,8 +53,15 @@ module.exports = function (sequelize, DataTypes) {
       references: {
         model: 'roles',
         key: 'id'
-      },
-
+      }
+    },
+    email_confirmed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    confirmation_token: {
+      type: DataTypes.STRING(25),
+      allowNull: true
     }
   }, {
     tableName: 'users'

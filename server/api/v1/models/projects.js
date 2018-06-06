@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
         key: 'id'
       }
     },
+    project_start: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
     project_end: {
       type: DataTypes.DATEONLY,
       allowNull: false
@@ -38,17 +42,22 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    published: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: '1'
+    },
     created_at: {
       type: DataTypes.DATE,
-      allowNull: true
+      defaultValue: DataTypes.NOW
     },
     updated_at: {
       type: DataTypes.DATE,
-      allowNull: true
+      defaultValue: DataTypes.NOW
     },
     published_at: {
       type: DataTypes.DATE,
-      allowNull: false
+      defaultValue: DataTypes.NOW
     },
     deleted_at: {
       type: DataTypes.DATE,

@@ -1,10 +1,33 @@
-const bcrypt = require('bcryptjs');
-const User = require('../models').users;
-const jwt = require('jsonwebtoken');
+/**
+ * Config
+ */
 const keys = require('../../../config/keys');
+
+/**
+ * Models
+ */
+const User = require('../models').users;
+const PassReset = require('../models').password_resets;
+
+/**
+ * Validation
+ */
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
+/**
+ * Utilities
+ */
+const send = require('../../../utilities/email_sender').send_email;
+const randomize = require('randomatic');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+/**
+ * Actions
+ */
+
+// Register a new user
 exports.create_user = (req, res) => {
   const {
     errors,
@@ -28,18 +51,34 @@ exports.create_user = (req, res) => {
         })
       }
 
+      const email_token = randomize('Aa0', 25);
+
+
+
       User.create({
           name: req.body.name,
           email: req.body.email,
           password: req.body.password,
-          role_id: 2
+          role_id: 2,
+          email_confirmed: false,
+          confirmation_token: email_token
         }).then((user) => {
+          //email settings
+          const subject = `${user.name}, please verify your email!`;
+          const text = 'Please verify your email';
+          const email_body = `<h2>Verify your email</h2><br/>
+      <a href="http://localhost:8000/verify/${user.confirmation_token}">Click this link to verify your email</a>`;
+
+          //send email with verification token to user
+          send(user.email, subject, text, email_body);
+
           res.json(user);
         })
         .catch(err => res.json(err));
     })
 }
 
+//Login as a user
 exports.user_login = (req, res) => {
   const {
     errors,
@@ -63,9 +102,16 @@ exports.user_login = (req, res) => {
         noUser: 'User not found'
       });
     }
+    //check if the user confirmed his account
+    if (!user.email_confirmed) {
+      res.status(400).json('Please verify your account');
+    }
 
+    //check if input password is the same as user password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
+
+        //create a json web token
         jwt.sign({
             id: user.id
           }, keys.secretOrKey, {
@@ -87,9 +133,21 @@ exports.user_login = (req, res) => {
   })
 }
 
-exports.get_users = (req, res) => {
-  User.findAll()
-    .then((users) => {
-      res.send(users);
-    })
+
+
+
+// Set user to confirmed
+exports.confirm_user = (req, res, next) => {
+
+  User.update({
+    email_confirmed: true
+  }, {
+    where: {
+      confirmation_token: req.params.id
+    }
+  }).then(() => {
+    res.json({
+      succes: true
+    });
+  })
 }
