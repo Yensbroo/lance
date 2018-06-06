@@ -40,7 +40,9 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     models.profiles.belongsTo(models.users, {
-      foreignKey: 'user_id'
+      onDelete: 'CASCADE',
+      foreignKey: 'user_id',
+
     })
   }
 

@@ -56,7 +56,7 @@ exports.create_user = (req, res) => {
 
 
       User.create({
-          name: req.body.name,
+          full_name: req.body.full_name,
           email: req.body.email,
           password: req.body.password,
           role_id: 2,
@@ -64,7 +64,7 @@ exports.create_user = (req, res) => {
           confirmation_token: email_token
         }).then((user) => {
           //email settings
-          const subject = `${user.name}, please verify your email!`;
+          const subject = `${user.full_name}, please verify your email!`;
           const text = 'Please verify your email';
           const email_body = `<h2>Verify your email</h2><br/>
       <a href="http://localhost:8000/verify/${user.confirmation_token}">Click this link to verify your email</a>`;

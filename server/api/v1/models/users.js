@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    full_name: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
@@ -78,9 +78,15 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: 'user_id'
     })
 
+    models.users.hasMany(models.reviews, {
+      foreignKey: 'user_id'
+    })
+
     models.users.hasOne(models.profiles, {
       foreignKey: 'user_id'
     })
+
+
   }
 
   User.beforeCreate((user, options) => {
