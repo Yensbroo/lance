@@ -72,6 +72,14 @@ module.exports = function (sequelize, DataTypes) {
   User.associate = (models) => {
     models.users.belongsTo(models.roles, {
       foreignKey: 'role_id'
+    });
+
+    models.users.hasMany(models.projects, {
+      foreignKey: 'user_id'
+    })
+
+    models.users.hasOne(models.profiles, {
+      foreignKey: 'user_id'
     })
   }
 

@@ -56,6 +56,7 @@ router.get('/categories/topic/:slug', categoryController.get_projects_by_categor
  * Bids
  */
 router.get('/bids/:projectId', bidController.get_bids_by_project);
+router.post('/bid/:projectId', authenticate, bidController.create_bid);
 router.delete('/bid/:id', authenticate, bidController.delete_bid);
 
 /**
