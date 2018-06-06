@@ -17,6 +17,8 @@ const projectController = require('./controllers/projectController');
 const categoryController = require('./controllers/categoryController');
 const bidController = require('./controllers/bidController');
 const passResetController = require('./controllers/passResetController');
+const profileController = require('./controllers/profileController');
+const reviewController = require('./controllers/reviewController');
 
 /**
  * Authentication
@@ -60,8 +62,16 @@ router.post('/bid/:projectId', authenticate, bidController.create_bid);
 router.delete('/bid/:id', authenticate, bidController.delete_bid);
 
 /**
- * roles
+ * Profiles
  */
+router.get('/profile/:userId', profileController.get_profile_by_id);
+router.put('/profile', authenticate, profileController.edit_profile);
+router.post('/profiles', authenticate, profileController.create_profile);
 
+/**
+ * Reviews
+ */
+router.post('/review/:profileId', authenticate, reviewController.create_review);
+router.get('/reviews/:profileId', reviewController.get_reviews_by_profile)
 
 module.exports = router;

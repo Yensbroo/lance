@@ -5,19 +5,19 @@ module.exports = function validateRegisterInput(data) {
   let errors = {};
 
   data.email = !isEmpty(data.email) ? data.email : "";
-  data.name = !isEmpty(data.name) ? data.name : "";
+  data.full_name = !isEmpty(data.full_name) ? data.full_name : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
-  if (!Validator.isLength(data.name, {
+  if (!Validator.isLength(data.full_name, {
       min: 4,
       max: 30
     })) {
-    errors.name = "Your name must be between 4 and 30 characters";
+    errors.full_name = "Your name must be between 4 and 30 characters";
   }
 
-  if (Validator.isEmpty(data.name)) {
-    errors.name = "A name is required";
+  if (Validator.isEmpty(data.full_name)) {
+    errors.full_name = "A name is required";
   }
 
   if (Validator.isEmpty(data.email)) {
