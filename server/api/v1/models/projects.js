@@ -73,6 +73,10 @@ module.exports = function (sequelize, DataTypes) {
     models.projects.belongsTo(models.users, {
       onDelete: "CASCADE",
       foreignKey: "user_id"
+    });
+
+    models.projects.hasMany(models.bids, {
+      foreignKey: 'project_id'
     })
   }
   return Project;

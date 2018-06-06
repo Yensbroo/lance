@@ -1,15 +1,17 @@
-/* jshint indent: 2 */
-
 module.exports = function (sequelize, DataTypes) {
-  const Bid = sequelize.define('bids', {
+  const Profile = sequelize.define('profiles', {
     id: {
       type: DataTypes.INTEGER(10).UNSIGNED,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    price: {
-      type: DataTypes.INTEGER(11),
+    headline: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    bio: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     created_at: {
@@ -19,7 +21,6 @@ module.exports = function (sequelize, DataTypes) {
     updated_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
-
     },
     user_id: {
       type: DataTypes.INTEGER(10).UNSIGNED,
@@ -27,29 +28,21 @@ module.exports = function (sequelize, DataTypes) {
       references: {
         model: 'users',
         key: 'id'
-      }
-    },
-    project_id: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
-      allowNull: false,
-      references: {
-        model: 'projects',
-        key: 'id'
-      }
+      },
     }
   }, {
-    tableName: 'bids'
+    tableName: 'profiles'
   });
 
-  Bid.associate = (models) => {
-    models.bids.belongsTo(models.users, {
-      foreignKey: 'user_id'
+  Profile.associate = (models) => {
+    models.profiles.hasMany(models.reviews, {
+      foreignKey: 'profile_id'
     });
 
-    models.bids.belongsTo(models.projects, {
-      foreignKey: 'project_id'
+    models.profiles.belongsTo(models.users, {
+      foreignKey: 'user_id'
     })
   }
 
-  return Bid;
+  return Profile;
 };
