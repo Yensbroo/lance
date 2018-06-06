@@ -51,7 +51,6 @@ exports.delete_bid = (req, res) => {
         user_id: req.user.id
       }
     }).then((bid) => {
-      console.log(bid);
       if (!bid) {
         res.status(404).json({
           nobids: 'This user has no bids'

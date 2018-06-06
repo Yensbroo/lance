@@ -29,3 +29,24 @@ exports.get_reviews_by_profile = (req, res) => {
     })
     .catch(err => res.json(err));
 }
+
+exports.delete_review = (req, res) => {
+  Review.findOne({
+    where: {
+      id: req.params.id,
+      user_id: req.user.id
+    }
+  }).then((review) => {
+    if (!review) {
+      res.status(404).json({
+        notfound: 'Review not found'
+      });
+    }
+
+    review.destroy().then(() => {
+      res.json({
+        success: true
+      });
+    })
+  })
+}

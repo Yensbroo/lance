@@ -72,6 +72,7 @@ router.post('/profiles', authenticate, profileController.create_profile);
  * Reviews
  */
 router.post('/review/:profileId', authenticate, reviewController.create_review);
-router.get('/reviews/:profileId', reviewController.get_reviews_by_profile)
+router.get('/reviews/:profileId', reviewController.get_reviews_by_profile);
+router.delete('/review/:id', authenticate, reviewController.delete_review)
 
 module.exports = router;
