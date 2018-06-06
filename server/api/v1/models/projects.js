@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
         key: 'id'
       }
     },
+    project_start: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
     project_end: {
       type: DataTypes.DATEONLY,
       allowNull: false

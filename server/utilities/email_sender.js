@@ -1,5 +1,5 @@
 'use strict';
-exports.send_email = (email, token) => {
+exports.send_email = (email, subject, text, html) => {
   require('dotenv').config({
     path: __dirname + '/../../.env'
   });
@@ -22,9 +22,9 @@ exports.send_email = (email, token) => {
     let mailOptions = {
       from: '"Yens Broothaers" <yensbroothaers@gmail.com>', // sender address
       to: email, // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world?', // plain text body
-      html: `<b>Verify your email</b><a>http://localhost:8000/verify/${token}</a>` // html body
+      subject: subject, // Subject line
+      text: text, // plain text body
+      html: html // html body
     };
 
     // send mail with defined transport object
