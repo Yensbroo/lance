@@ -1,0 +1,21 @@
+@import '../abstracts/variables';
+header {
+  width: 100%;
+  height: 65px;
+  background: $lnc-grey;
+  display: flex;
+  flex-direction: row;
+  .lnc-header__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    h2,
+    p {
+      color: white;
+      align-self: center;
+    }
+  }
+}

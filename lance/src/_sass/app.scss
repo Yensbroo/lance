@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import '~@angular/material/theming';
+// Components
+@import 'components/header';
+// Abstracts
+@import 'abstracts/variables';
+@include mat-core();
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}

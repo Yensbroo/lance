@@ -1,0 +1,9 @@
+<ul *ngIf="projects">
+  <li *ngFor="let project of projects">
+    <h3>{{project.title}}</h3>
+    <h3>{{project.id}}</h3>
+  </li>
+</ul>
+<p *ngIf="!projects">
+  No Projects
+</p>
