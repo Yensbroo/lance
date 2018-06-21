@@ -7,10 +7,12 @@ import { Routes, RouterModule } from "@angular/router";
 import { ProjectsPageComponent } from "./modules/projects/pages/projects-page/projects-page.component";
 import { ProjectPageComponent } from "./modules/projects/pages/project-page/project-page.component";
 import { LoginComponent } from "./core/components/login/login.component";
+import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
-  { path: "projects", component: ProjectsPageComponent },
-  { path: "project/:id", component: ProjectPageComponent },
+  { path: "", component: HomeComponent },
+  { path: "opdrachten", component: ProjectsPageComponent },
+  { path: "opdracht/:id", component: ProjectPageComponent },
   { path: "login", component: LoginComponent }
 ];
 

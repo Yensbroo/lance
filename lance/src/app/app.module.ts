@@ -12,9 +12,10 @@ import { MaterialModule } from "./material/material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { ProjectsModule } from "./modules/projects/projects.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HomeComponent } from "./home/home.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     MaterialModule,
     BrowserModule,
@@ -22,8 +23,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     BrowserAnimationsModule,
     AppRoutingModule,
     ProjectsModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
