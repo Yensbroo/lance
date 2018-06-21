@@ -1,0 +1,38 @@
+@import '../abstracts/variables';
+.lnc-landing {
+  margin-top: 65px;
+  height: 700px;
+  background: $lnc-green;
+  overflow: hidden;
+  .landing-bg {
+    position: relative;
+    img {
+      float: right;
+      width: 120%;
+      margin-top: 100px;
+      position: relative;
+      bottom: 110px;
+      object-fit: cover;
+      object-position: 0px -320px;
+    }
+  }
+  h1,
+  p {
+    color: white;
+  }
+  .lnc-wrapper {
+    .landing__title {
+      position: absolute;
+      top: 285px;
+      width: 50%;
+      h1 {
+        padding-bottom: 50px;
+        font-size: 36px;
+      }
+      p {
+        width: 70%;
+        font-size: 20px;
+      }
+    }
+  }
+}

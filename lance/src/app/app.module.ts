@@ -13,9 +13,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ProjectsModule } from "./modules/projects/projects.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./home/home.component";
+import { LandingComponent } from './home/landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, LandingComponent],
   imports: [
     MaterialModule,
     BrowserModule,

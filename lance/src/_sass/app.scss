@@ -1,13 +1,18 @@
 @charset "UTF-8";
 @import '~@angular/material/theming';
+// Base
+@import 'base/fonts';
 // Components
-@import 'components/header';
+@import 'layout/header';
+@import 'layout/wrapper';
 // Abstracts
 @import 'abstracts/variables';
+@import 'pages/home';
 @include mat-core();
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 h1,
@@ -16,7 +21,12 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul {
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }

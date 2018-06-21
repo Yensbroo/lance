@@ -1,0 +1,63 @@
+@import '../abstracts/variables';
+header {
+  width: 100%;
+  height: 65px;
+  top: 0;
+  left: 0;
+  background: $lnc-light-grey;
+  border-bottom: 1px solid $lnc-green;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .header-menu {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    background: $lnc-green;
+    align-items: center;
+    a {
+      color: white;
+      span {
+        padding-left: 10px;
+      }
+    }
+  }
+  .lnc-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      color: $lnc-green;
+      transition: border 0.3s;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      li {
+        padding-left: 20px;
+        color: white;
+        display: inline-block;
+      }
+      a:after {
+        content: '';
+        display: block;
+        border-bottom: solid 3px $lnc-green;
+        transform: scaleX(0);
+        transition: transform 0.2s ease-in-out;
+      }
+      a:hover:after {
+        transform: scaleX(1);
+        transform-origin: 0% 50%;
+      }
+    }
+    .lnc-logo {
+      width: 110px;
+      display: block;
+      position: absolute;
+      left: 45%;
+      top: 8px;
+    }
+  }
+}
