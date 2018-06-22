@@ -1,7 +1,7 @@
 @import '../abstracts/variables';
 .lnc-landing {
   min-height: 100vh;
-  background: $lnc-green;
+  background: $lnc-blue;
   overflow: hidden;
   .landing-bg {
     position: relative;
@@ -30,6 +30,9 @@
       h1 {
         padding-bottom: 50px;
         font-size: 36px;
+        span {
+          color: black;
+        }
       }
       p {
         font-size: 20px;
