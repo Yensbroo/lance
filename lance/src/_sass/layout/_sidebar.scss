@@ -1,0 +1,86 @@
+.lnc-sidenav {
+  width: 300px;
+  transform: translate3D(-100%, 0, 0);
+  transition: transform 0.4s cubic-bezier(0.74, 0.13, 0, 1.0);
+  height: 100%;
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  background: $lnc-light-grey;
+  z-index: 101;
+  ul {
+    list-style: none;
+    li {
+      a {
+        color: black;
+      }
+      .item,
+      #close {
+        padding: 30px 36px;
+        border-bottom: 1px solid #E0E0E0;
+        position: relative;
+        display: block;
+      }
+      #close {
+        text-align: right;
+        cursor: pointer;
+        transition: color 0.1s ease-in-out;
+        i {
+          padding-left: 5px;
+          position: relative;
+          font-size: 20px;
+          top: 3px;
+        }
+      }
+      #close:hover {
+        color: $lnc-green;
+      }
+      .item {
+        transition: all 0.3s ease-in-out;
+        font-size: 17px;
+        font-weight: 900;
+      }
+      .item:hover {
+        background: white;
+        border-right: 5px solid $lnc-green;
+        color: $lnc-green;
+      }
+      #account {
+        cursor: pointer;
+        i {
+          float: right;
+        }
+      }
+    }
+  }
+  .subnav {
+    display: none;
+  }
+  .subnav-open {
+    display: block;
+  }
+}
+
+.lnc-sidenav.sidenav-open {
+  transform: translateZ(0);
+}
+
+.lnc-sidenav__overlay {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.lnc-sidenav__overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}

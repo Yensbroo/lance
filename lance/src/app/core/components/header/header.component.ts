@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   @Output() sidebarToggle = new EventEmitter(true);
-  @Output() modalToggle = new EventEmitter(true);
+
   constructor() {}
 
   ngOnInit() {}
@@ -16,6 +16,4 @@ export class HeaderComponent implements OnInit {
   sidebarOpen() {
     this.sidebarToggle.emit(true);
   }
-
-  modalOpen() {}
 }

@@ -1,5 +1,32 @@
-<mat-nav-list>
-  <mat-list-item *ngFor='let link of links'>
-    <a href="">{{link.title}}</a>
-  </mat-list-item>
-</mat-nav-list>
+<div>
+  <ul>
+    <li>
+      <span (click)="navClose()" id="close">Close
+        <i class="fas fa-times"></i>
+      </span>
+    </li>
+    <li>
+      <a class="item" routerLink="/">Home</a>
+    </li>
+    <li>
+      <a class="item" routerLink="opdrachten">Opdrachten</a>
+    </li>
+    <li>
+      <span class="item" id="account" (click)="openSub()">Mijn account
+        <i class="fas fa-chevron-right"></i>
+      </span>
+
+      <ul class="subnav" [class.subnav-open]="isOpen">
+        <li>
+          <a routerLink="/" class="item">Mijn profiel</a>
+        </li>
+        <li>
+          <a routerLink="/" class="item">Profielfoto</a>
+        </li>
+        <li>
+          <a routerLink="/" class="item">Instellingen</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
