@@ -5,12 +5,12 @@ header {
   top: 0;
   left: 0;
   background: $lnc-green;
-  border-bottom: 1px solid white;
   position: fixed;
   display: flex;
   flex-direction: row;
   align-items: center;
   z-index: 102;
+  transition: all 0.2s ease-in-out;
   .header-menu {
     display: flex;
     flex-direction: row;
