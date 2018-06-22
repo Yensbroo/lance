@@ -14,9 +14,10 @@ import { ProjectsModule } from "./modules/projects/projects.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./home/home.component";
 import { LandingComponent } from './home/landing/landing.component';
+import { OpdrachtComponent } from './home/opdracht/opdracht.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LandingComponent],
+  declarations: [AppComponent, HomeComponent, LandingComponent, OpdrachtComponent],
   imports: [
     MaterialModule,
     BrowserModule,
