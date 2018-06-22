@@ -33,8 +33,15 @@
       h1 {
         padding-bottom: 50px;
         font-size: 60px;
-        span {
-          color: black;
+        #you {
+          color: rgb(224, 98, 98);
+        }
+        #we_connect {
+          font-weight: 200;
+          font-style: italic;
+          span {
+            color: rgb(73, 73, 211);
+          }
         }
       }
       p {
@@ -53,7 +60,7 @@
           color: white;
         }
         a {
-          font-weight: 900;
+          font-weight: 400;
           background: transparent;
           border: 1px solid white;
           color: white;
@@ -100,11 +107,23 @@
     flex-direction: column;
     align-items: center;
     .opdracht-item {
+      padding: 20px;
       background: white;
       width: 300px;
-      height: 90px;
+      height: 50px;
       margin-bottom: 20px;
       box-shadow: 15px 40px 60px 0 rgba(0, 0, 0, .16);
+      .title_line {
+        width: 230px;
+        height: 10px;
+        background: #E0E0E0;
+        margin-bottom: 20px;
+      }
+      .name_line {
+        width: 140px;
+        height: 10px;
+        background: #E0E0E0;
+      }
     }
   }
   .info {
@@ -121,9 +140,9 @@
       font-size: 20px;
     }
     a {
-      margin-top: 47px;
+      margin-top: 26px;
       padding: 10px;
-      width: 31%;
+      width: 34%;
       background: $lnc-green;
       text-align: center;
       border-radius: 6px;
