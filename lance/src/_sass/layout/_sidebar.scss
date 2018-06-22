@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   background: $lnc-light-grey;
-  z-index: 101;
+  z-index: 103;
   ul {
     list-style: none;
     li {
@@ -74,7 +74,7 @@
   visibility: hidden;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 102;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;

@@ -1,7 +1,7 @@
 @import '../abstracts/variables';
 .lnc-landing {
   min-height: 100vh;
-  background: $lnc-blue;
+  background: $lnc-green;
   overflow: hidden;
   .landing-bg {
     position: relative;
@@ -23,13 +23,16 @@
     display: flex;
     justify-content: center;
     .landing__title {
+      z-index: 101;
       position: absolute;
-      top: 285px;
-      width: 50%;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      transform: translate(-50%, -50%);
       text-align: center;
       h1 {
         padding-bottom: 50px;
-        font-size: 36px;
+        font-size: 60px;
         span {
           color: black;
         }
@@ -55,6 +58,7 @@
           border: 1px solid white;
           color: white;
           padding: 15px;
+          font-size: 20px;
           border-radius: 5px;
           transition: all 0.2s ease;
         }
@@ -63,6 +67,69 @@
           background: white;
         }
       }
+    }
+  }
+  .bg-square {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    opacity: 0.25;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: 100;
+  }
+}
+
+.section_two {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: $lnc-light-grey;
+  .info,
+  .list-image {
+    width: 50%;
+  }
+  .list-image {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .opdracht-item {
+      background: white;
+      width: 300px;
+      height: 90px;
+      margin-bottom: 20px;
+      box-shadow: 15px 40px 60px 0 rgba(0, 0, 0, .16);
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    h1 {
+      font-size: 40px;
+      color: $lnc-green;
+      margin-bottom: 50px;
+    }
+    p {
+      width: 80%;
+      font-size: 20px;
+    }
+    a {
+      margin-top: 47px;
+      padding: 10px;
+      width: 28%;
+      background: $lnc-green;
+      text-align: center;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      font-size: 18px;
     }
   }
 }

@@ -10,7 +10,19 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  z-index: 100;
+  z-index: 102;
+  .header-menu {
+    display: flex;
+    flex-direction: row;
+    background: $lnc-green;
+    align-items: center;
+    a {
+      color: white;
+      span {
+        padding-left: 10px;
+      }
+    }
+  }
   .lnc-wrapper {
     display: flex;
     flex-direction: row;
