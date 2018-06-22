@@ -24,9 +24,10 @@ export class HeaderComponent implements OnInit {
     const currentScroll = window.pageYOffset;
 
     if (this.prevScroll > currentScroll) {
-      document.querySelector(".header").style.top = "0";
+      (document.querySelector(".header") as HTMLInputElement).style.top = "0";
     } else {
-      document.querySelector(".header").style.top = "-75px";
+      (document.querySelector(".header") as HTMLInputElement).style.top =
+        "-75px";
     }
 
     this.prevScroll = currentScroll;

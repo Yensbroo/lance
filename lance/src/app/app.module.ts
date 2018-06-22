@@ -15,9 +15,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./home/home.component";
 import { LandingComponent } from './home/landing/landing.component';
 import { OpdrachtComponent } from './home/opdracht/opdracht.component';
+import { BiedenComponent } from './home/bieden/bieden.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LandingComponent, OpdrachtComponent],
+  declarations: [AppComponent, HomeComponent, LandingComponent, OpdrachtComponent, BiedenComponent],
   imports: [
     MaterialModule,
     BrowserModule,
