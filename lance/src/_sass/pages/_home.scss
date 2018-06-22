@@ -1,7 +1,6 @@
 @import '../abstracts/variables';
 .lnc-landing {
-  margin-top: 65px;
-  height: 700px;
+  min-height: 100vh;
   background: $lnc-green;
   overflow: hidden;
   .landing-bg {
