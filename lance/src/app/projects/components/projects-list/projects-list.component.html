@@ -1,0 +1,13 @@
+<h2>
+  Alle opdrachten</h2>
+<ul *ngIf="projects" class="projects">
+  <li *ngFor="let project of projects">
+    <a routerLink=`opdracht/${}`>{{project.title}}</a>
+    <p>{{project.project_end}}</p>
+    <p>{{project.category.name}}</p>
+    <hr>
+  </li>
+</ul>
+<p *ngIf="!projects">
+  No Projects
+</p>

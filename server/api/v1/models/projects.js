@@ -78,6 +78,10 @@ module.exports = function (sequelize, DataTypes) {
     models.projects.hasMany(models.bids, {
       foreignKey: 'project_id'
     })
+
+    models.projects.belongsTo(models.categories, {
+      foreignKey: 'category_id'
+    })
   }
   return Project;
 };

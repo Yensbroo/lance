@@ -4,8 +4,8 @@ import { Routes, RouterModule } from "@angular/router";
 /**
  * Components as pages
  */
-import { ProjectsPageComponent } from "./modules/projects/pages/projects-page/projects-page.component";
-import { ProjectPageComponent } from "./modules/projects/pages/project-page/project-page.component";
+import { ProjectsPageComponent } from "./projects/pages/projects-page/projects-page.component";
+import { ProjectPageComponent } from "./projects/pages/project-page/project-page.component";
 import { LoginComponent } from "./core/components/login/login.component";
 import { HomeComponent } from "./home/home.component";
 

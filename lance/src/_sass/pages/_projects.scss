@@ -1,0 +1,32 @@
+.lnc-projects {
+  background: $lnc-light-grey;
+  margin-top: 75px;
+  padding-top: 40px;
+  h1 {
+    text-align: center;
+  }
+  .lnc-projects__filter {
+    box-sizing: border-box;
+  }
+  .lnc-projects__list {
+    box-sizing: border-box;
+    h2 {
+      padding-bottom: 20px;
+    }
+    .projects {
+      border-top: 4px solid $lnc-green;
+      border-radius: 4px;
+      list-style: none;
+      padding: 20px;
+      background: white;
+      li {
+        padding-bottom: 20px;
+        a {
+          font-weight: 700;
+          font-size: 20px;
+          color: $lnc-green;
+        }
+      }
+    }
+  }
+}

@@ -37,7 +37,7 @@
           color: rgb(224, 98, 98);
         }
         #we_connect {
-          font-weight: 200;
+          font-weight: 900;
           font-style: italic;
           span {
             color: rgb(73, 73, 211);
@@ -97,21 +97,21 @@
   align-items: center;
   min-height: 100vh;
   background: $lnc-light-grey;
-  .info,
-  .list-image {
-    width: 50%;
-  }
+  box-sizing: border-box;
   .list-image {
     float: left;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 400px;
     .opdracht-item {
+      cursor: pointer;
       padding: 20px;
       background: white;
       width: 300px;
       height: 50px;
       margin-bottom: 20px;
+      transition: all 0.2s ease;
       box-shadow: 15px 40px 60px 0 rgba(0, 0, 0, .16);
       .title_line {
         width: 230px;
@@ -125,19 +125,21 @@
         background: #E0E0E0;
       }
     }
+    .opdracht-item:hover {
+      padding: 25px;
+    }
   }
   .info {
-    display: flex;
-    flex-direction: column;
-    float: left;
+    float: right;
     h1 {
       font-size: 40px;
       color: $lnc-green;
       margin-bottom: 50px;
     }
     p {
-      width: 80%;
+      width: 100%;
       font-size: 20px;
+      margin-bottom: 60px;
     }
     a {
       margin-top: 26px;
@@ -149,6 +151,33 @@
       border: none;
       color: white;
       font-size: 18px;
+    }
+  }
+}
+
+.section_three {
+  background: $lnc-green;
+  min-height: 600px;
+  h1 {
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+  }
+  .categories {
+    display: flex;
+    justify-content: center;
+    .category_item {
+      text-align: center;
+      line-height: 200px;
+      margin: 10px;
+      background: white;
+      height: 200px;
+      box-shadow: 15px 40px 60px 0 rgba(0, 0, 0, .16);
+      span {
+        font-size: 25px;
+        color: $lnc-green;
+        vertical-align: center;
+      }
     }
   }
 }
