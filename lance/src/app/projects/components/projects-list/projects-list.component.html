@@ -1,8 +1,15 @@
-<h2>
-  Alle opdrachten</h2>
+<h2>Alle opdrachten</h2>
 <ul *ngIf="projects" class="projects">
+  <li>
+    <select>
+      <option value="">Nieuwste eerst</option>
+      <option value="">Oudste eerst</option>
+      <option value="">Hoogste budget</option>
+      <option value="">Laagste budget</option>
+    </select>
+  </li>
   <li *ngFor="let project of projects">
-    <a routerLink=`opdracht/${}`>{{project.title}}</a>
+    <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
     <p>{{project.project_end}}</p>
     <p>{{project.category.name}}</p>
     <hr>

@@ -7,10 +7,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { ProjectPageComponent } from "./pages/project-page/project-page.component";
 import { ProjectsPageComponent } from "./pages/projects-page/projects-page.component";
 import { ProjectDetailComponent } from "./components/project-detail/project-detail.component";
-import { ProjectFilterComponent } from './components/project-filter/project-filter.component';
+import { ProjectFilterComponent } from "./components/project-filter/project-filter.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
-  imports: [CommonModule, CoreModule, HttpClientModule],
+  imports: [CommonModule, CoreModule, HttpClientModule, RouterModule],
   declarations: [
     ProjectsListComponent,
     ProjectPageComponent,

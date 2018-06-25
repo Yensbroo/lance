@@ -1,21 +1,40 @@
 .lnc-projects {
   background: $lnc-light-grey;
-  margin-top: 75px;
-  padding-top: 40px;
+  padding-top: 100px;
   h1 {
     text-align: center;
   }
+  .lnc-projects__filter,
+  .projects {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+    border-radius: 4px;
+    border-top: 15px solid $lnc-green;
+  }
   .lnc-projects__filter {
-    box-sizing: border-box;
+    background: white;
+    padding: 16px;
+    dt {
+      color: $lnc-green;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    ul {
+      margin-left: -20px;
+      margin-top: 10px;
+      li {
+        list-style: none;
+        padding-bottom: 10px;
+        input {
+          margin-right: 8px;
+        }
+      }
+    }
   }
   .lnc-projects__list {
-    box-sizing: border-box;
     h2 {
       padding-bottom: 20px;
     }
     .projects {
-      border-top: 4px solid $lnc-green;
-      border-radius: 4px;
       list-style: none;
       padding: 20px;
       background: white;
