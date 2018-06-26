@@ -13,7 +13,7 @@
     <div class="lnc-user">
       <a *ngIf="authService.loggedIn()" routerLink="register">Registreer</a>
       <a *ngIf="authService.loggedIn()" routerLink="login">Login</a>
-      <a *ngIf="!authService.loggedIn()">Yens</a>
+      <a *ngIf="!authService.loggedIn()">{{ user.full_name }}</a>
     </div>
   </div>
 </header>

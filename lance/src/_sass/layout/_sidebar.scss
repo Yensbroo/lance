@@ -40,6 +40,10 @@
         transition: all 0.3s ease-in-out;
         font-size: 17px;
         font-weight: 900;
+        cursor: pointer;
+        .arrow {
+          transition: all 0.2s ease;
+        }
       }
       .item:hover {
         background: white;

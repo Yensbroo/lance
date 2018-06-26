@@ -99,12 +99,14 @@ exports.user_login = (req, res) => {
   }).then((user) => {
     if (!user) {
       res.status(404).json({
-        noUser: 'User not found'
+        email: 'User not found'
       });
     }
     //check if the user confirmed his account
     if (!user.email_confirmed) {
-      res.status(400).json('Please verify your account');
+      res.status(400).json({
+        email: 'Please verify your account'
+      });
     }
 
     //check if input password is the same as user password
@@ -119,6 +121,7 @@ exports.user_login = (req, res) => {
           },
           (err, token) => {
             res.json({
+              user: user,
               success: true,
               token: "Bearer " + token,
               strategy: 'jwt'
@@ -126,7 +129,7 @@ exports.user_login = (req, res) => {
           })
       } else {
         return res.status(400).json({
-          wrongpassword: 'Password incorrect'
+          password: 'Password incorrect'
         })
       }
     })

@@ -12,11 +12,11 @@
       <a class="item" routerLink="opdrachten">Opdrachten</a>
     </li>
     <li>
-      <span class="item" id="account" (click)="openSub()">Mijn account
-        <i class="fas fa-chevron-right"></i>
+      <span class="item" id="account" (click)="openSub()" *ngIf="!authService.loggedIn()">Mijn account
+        <i class="fas fa-chevron-right arrow"></i>
       </span>
 
-      <ul class="subnav" [class.subnav-open]="isOpen">
+      <ul class="subnav" [class.subnav-open]="isOpen" *ngIf="!authService.loggedIn()">
         <li>
           <a routerLink="/" class="item">Mijn profiel</a>
         </li>
@@ -25,6 +25,9 @@
         </li>
         <li>
           <a routerLink="/" class="item">Instellingen</a>
+        </li>
+        <li>
+          <a (click)="logout()" class="item">Afmelden</a>
         </li>
       </ul>
     </li>

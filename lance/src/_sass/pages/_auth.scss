@@ -1,0 +1,42 @@
+.lnc-auth {
+  background: white;
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 200px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+  .auth__wrapper {
+    width: 80%;
+    margin: 0 auto;
+    h1 {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .login {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      input,
+      button {
+        margin-top: 25px;
+        align-self: center;
+        width: 100%;
+      }
+      button {
+        margin-bottom: 10px;
+      }
+      p {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.lnc-auth.register {
+  min-height: 560px;
+}
+
+.registered {
+  margin-top: 120px;
+}
