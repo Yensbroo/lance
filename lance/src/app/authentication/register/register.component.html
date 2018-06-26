@@ -1,3 +1,22 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <div class="lnc-auth register">
+    <div class="auth__wrapper">
+      <h1>Registreer</h1>
+      <hr>
+      <form (submit)="onRegister()" class="login">
+        <input type="text" [(ngModel)]="full_name" name="full_name" placeholder="Full name">
+        <p *ngIf="message.full_name !== ''" class="lnc-error">{{message.full_name}}</p>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
+        <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
+        <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Wachtwoord">
+        <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
+        <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p>
+        <input type="password" [(ngModel)]="password2" name="password2" placeholder="Herhaal wachtwoord">
+        <p *ngIf="message.password2 !== ''" class="lnc-error">{{message.password2}}</p>
+        <button type="submit ">Registreer</button>
+        <span>Wachtwoord vergeten? Klik hier</span>
+      </form>
+    </div>
+  </div>
+</div>

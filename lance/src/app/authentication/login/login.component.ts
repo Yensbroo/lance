@@ -26,15 +26,13 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.login(user).subscribe(
-      resp => {
-        this.data = resp;
+      res => {
+        this.data = res;
         this.authService.storeUser(this.data.token, this.data.user);
         this.router.navigate([""]);
-        console.log(resp);
       },
       err => {
         this.message = err.error;
-        console.log(err);
       }
     );
   }
