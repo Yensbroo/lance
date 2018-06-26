@@ -6,6 +6,7 @@ import {
   HostListener
 } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../core/services/authentication.service";
 
 @Component({
   selector: "app-header",
@@ -15,7 +16,7 @@ import { Router } from "@angular/router";
 export class HeaderComponent implements OnInit {
   @Output() sidebarToggle = new EventEmitter(true);
 
-  constructor() {}
+  constructor(private authService: AuthenticationService) {}
 
   public prevScroll = window.pageYOffset;
 
@@ -33,7 +34,9 @@ export class HeaderComponent implements OnInit {
     this.prevScroll = currentScroll;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.authService.loggedIn());
+  }
 
   sidebarOpen() {
     this.sidebarToggle.emit(true);

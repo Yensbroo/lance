@@ -10,9 +10,10 @@
     <a routerLink="/">
       <img src="../../../../assets/images/lnc-white.svg" alt="logo" class="lnc-logo">
     </a>
-
     <div class="lnc-user">
-      <a href="">Yens Broothaers</a>
+      <a *ngIf="authService.loggedIn()" routerLink="register">Registreer</a>
+      <a *ngIf="authService.loggedIn()" routerLink="login">Login</a>
+      <a *ngIf="!authService.loggedIn()">Yens</a>
     </div>
   </div>
 </header>

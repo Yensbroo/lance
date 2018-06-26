@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationService } from "../../core/services/authentication.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
         this.data = resp;
         this.authService.storeUser(this.data.token, this.data.user);
         this.router.navigate([""]);
+        console.log(resp);
       },
       err => {
         this.message = err.error;

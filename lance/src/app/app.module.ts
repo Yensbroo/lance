@@ -17,6 +17,7 @@ import { LandingComponent } from "./home/landing/landing.component";
 import { OpdrachtComponent } from "./home/opdracht/opdracht.component";
 import { BiedenComponent } from "./home/bieden/bieden.component";
 import { CategoriesComponent } from "./home/categories/categories.component";
+import { AuthenticationModule } from "./authentication/authentication.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CategoriesComponent } from "./home/categories/categories.component";
     BrowserAnimationsModule,
     AppRoutingModule,
     ProjectsModule,
-    FormsModule
+    FormsModule,
+    AuthenticationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
