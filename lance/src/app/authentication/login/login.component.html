@@ -1,18 +1,20 @@
-<div class="container">
-  <div class="lnc-auth">
-    <div class="auth__wrapper">
-      <h1>Login</h1>
-      <hr>
-      <form (submit)="onLogin()" class="login">
-        <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
-        <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
-        <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p>
-        <input type="password" [(ngModel)]="password" name="password" placeholder="Wachtwoord">
-        <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
-        <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p>
-        <button type="submit ">Login</button>
-        <span>Wachtwoord vergeten? Klik hier</span>
-      </form>
+<div class="auth">
+  <div class="container">
+    <div class="lnc-auth">
+      <div class="auth__wrapper">
+        <h1>Login</h1>
+        <hr>
+        <form (submit)="onLogin()" class="login">
+          <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
+          <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
+          <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p>
+          <input type="password" [(ngModel)]="password" name="password" placeholder="Wachtwoord">
+          <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
+          <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p>
+          <button type="submit ">Login</button>
+          <span>Wachtwoord vergeten? Klik hier</span>
+        </form>
+      </div>
     </div>
   </div>
 </div>

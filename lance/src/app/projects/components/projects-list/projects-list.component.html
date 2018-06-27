@@ -1,20 +1,32 @@
 <h2>Alle opdrachten</h2>
-<ul *ngIf="projects" class="projects">
-  <li>
-    <select>
-      <option value="">Nieuwste eerst</option>
-      <option value="">Oudste eerst</option>
-      <option value="">Hoogste budget</option>
-      <option value="">Laagste budget</option>
-    </select>
-  </li>
-  <li *ngFor="let project of projects">
-    <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
-    <p>{{project.project_end}}</p>
-    <p>{{project.category.name}}</p>
-    <hr>
-  </li>
-</ul>
+<div class="projects_sort">
+  <select>
+    <option value="">Nieuwste eerst</option>
+    <option value="">Oudste eerst</option>
+    <option value="">Hoogste budget</option>
+    <option value="">Laagste budget</option>
+  </select>
+  <input type="text" class="searchBox">
+</div>
+
+<div *ngIf="projects" class="projects">
+  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects">
+    <div class="project_info">
+      <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
+      <p>{{project.body}}</p>
+      <p id="date">{{project.published_at}}</p>
+      <p id="category">{{project.category.name}}</p>
+    </div>
+    <div class="project_end">
+      <p>{{project.project_end}}</p>
+    </div>
+    <div class="project_stats">
+      <p id="budget">€ {{project.budget}}</p>
+      <p id="bids">{{project.bids.length}} biedingen</p>
+    </div>
+
+  </div>
+</div>
 <p *ngIf="!projects">
   No Projects
 </p>
