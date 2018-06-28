@@ -9,15 +9,24 @@ import { ProjectsPageComponent } from "./pages/projects-page/projects-page.compo
 import { ProjectDetailComponent } from "./components/project-detail/project-detail.component";
 import { ProjectFilterComponent } from "./components/project-filter/project-filter.component";
 import { RouterModule } from "@angular/router";
+import { FilterPipe } from "./filter.pipe";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
-  imports: [CommonModule, CoreModule, HttpClientModule, RouterModule],
+  imports: [
+    CommonModule,
+    CoreModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule
+  ],
   declarations: [
     ProjectsListComponent,
     ProjectPageComponent,
     ProjectsPageComponent,
     ProjectDetailComponent,
-    ProjectFilterComponent
+    ProjectFilterComponent,
+    FilterPipe
   ],
   exports: [ProjectsListComponent]
 })

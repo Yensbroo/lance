@@ -6,11 +6,11 @@
     <option value="">Hoogste budget</option>
     <option value="">Laagste budget</option>
   </select>
-  <input type="text" class="searchBox">
+  <input [(ngModel)]="searchText" type="text" class="searchBox">
 </div>
 
 <div *ngIf="projects" class="projects">
-  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects">
+  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects | projectFilter : searchText">
     <div class="project_info">
       <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
       <p>{{project.body}}</p>
