@@ -1,5 +1,4 @@
 <header class="header">
-
   <div class="lnc-wrapper">
     <div class="header-menu">
       <a (click)="sidebarOpen()">
@@ -7,13 +6,38 @@
         <span>Menu</span>
       </a>
     </div>
-    <a routerLink="/">
-      <img src="../../../../assets/images/lnc-white.svg" alt="logo" class="lnc-logo">
-    </a>
+    <div class="lnc-logo">
+      <a routerLink="/">
+        <img src="../../../../assets/images/lnc-white.svg" alt="logo">
+      </a>
+    </div>
     <div class="lnc-user">
-      <a *ngIf="authService.loggedIn()" routerLink="register">Registreer</a>
+      <a routerLink="opdrachten">Opdrachten</a>
+      <a href="">Plaats een opdracht</a>
       <a *ngIf="authService.loggedIn()" routerLink="login">Login</a>
-      <a *ngIf="!authService.loggedIn()">{{ user.full_name }}</a>
+      <a *ngIf="authService.loggedIn()" routerLink="register" id="register">Registreer</a>
+      <div class="header-dropdown">
+        <div class="header-dropbtn">
+          <a *ngIf="!authService.loggedIn()" id="user">{{ user.full_name }}</a>
+        </div>
+        <div class="header-dropdown__content">
+          <ul>
+            <li>
+              <a href="">Mijn profiel</a>
+            </li>
+            <li>
+              <a href="">Profielfoto</a>
+            </li>
+            <li>
+              <a href="">Instellingen</a>
+            </li>
+            <li>
+              <a href="">Afmelden</a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </header>

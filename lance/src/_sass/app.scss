@@ -60,6 +60,10 @@ ul {
   list-style: none;
 }
 
+.container {
+  width: 1260px;
+}
+
 *,
 *::before,
 *::after {
@@ -86,7 +90,7 @@ lg: 992px,
 /* Extra large screen / wide desktop*/
 
 xl: 1200px);
-$container-max-widths: ( sm: 1190px, md: 1190px, lg: 1190px, xl: 1190px);
+$container-max-widths: ( sm: 1220px, md: 1220px, lg: 1220px, xl: 1220px);
 @import "../node_modules/bootstrap/scss/mixins/breakpoints";
 @import "../node_modules/bootstrap/scss/mixins/grid-framework";
 @import "../node_modules/bootstrap/scss/mixins/grid";
