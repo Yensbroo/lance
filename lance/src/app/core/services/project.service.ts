@@ -9,7 +9,7 @@ import { Project } from "../models/project";
 })
 export class ProjectService {
   apiUrl = "http://localhost:8000/api/v1";
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAllProjects() {
     return this.httpClient.get<Array<Project>>(
@@ -19,5 +19,8 @@ export class ProjectService {
 
   getProjectById(id: String) {
     return this.httpClient.get(this.apiUrl + "/project/" + id);
+  }
+
+  createProject() {
   }
 }

@@ -11,6 +11,8 @@ import { ProjectFilterComponent } from "./components/project-filter/project-filt
 import { RouterModule } from "@angular/router";
 import { FilterPipe } from "./filter.pipe";
 import { FormsModule } from "@angular/forms";
+import { SortPipe } from './sort.pipe';
+import { CreateProjectPageComponent } from './pages/create-project-page/create-project-page.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { FormsModule } from "@angular/forms";
     ProjectsPageComponent,
     ProjectDetailComponent,
     ProjectFilterComponent,
-    FilterPipe
+    FilterPipe,
+    SortPipe,
+    CreateProjectPageComponent
   ],
   exports: [ProjectsListComponent]
 })

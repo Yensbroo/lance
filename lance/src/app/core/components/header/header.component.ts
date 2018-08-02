@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   @Output() sidebarToggle = new EventEmitter(true);
   public user: String;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService) { }
 
   public prevScroll = window.pageYOffset;
 
