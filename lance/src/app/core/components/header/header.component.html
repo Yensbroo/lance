@@ -18,7 +18,7 @@
       <a *ngIf="authService.loggedIn()" routerLink="register" id="register">Registreer</a>
       <div class="header-dropdown">
         <div class="header-dropbtn">
-          <a *ngIf="!authService.loggedIn()" id="user">{{ user.full_name }}</a>
+          <a *ngIf="!authService.loggedIn()" id="user">{{ authService._currentUser?.full_name }}</a>
         </div>
         <div class="header-dropdown__content">
           <ul>
@@ -32,8 +32,7 @@
               <a href="">Instellingen</a>
             </li>
             <li>
-              <a href="">Afmelden</a>
-
+              <a (click)="logout()">Afmelden</a>
             </li>
           </ul>
         </div>

@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   @Output() sidebarToggle = new EventEmitter(true);
   public user: String;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, public router: Router) { }
 
   public prevScroll = window.pageYOffset;
 
@@ -41,7 +41,17 @@ export class HeaderComponent implements OnInit {
     this.user = data;
   }
 
+  get userName(): User {
+    return this.authService._currentUser;
+  }
+
+
   sidebarOpen() {
     this.sidebarToggle.emit(true);
+  }
+
+  logout() {
+    this.authService.logoutUser();
+    this.router.navigate([""]);
   }
 }

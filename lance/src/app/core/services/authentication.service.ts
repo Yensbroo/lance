@@ -1,15 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthenticationService {
-  public currentUser: any;
+  public _currentUser: User;
   authToken: any;
   apiUrl = "http://localhost:8000/api/v1";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(user) {
     return this.http.post(this.apiUrl + "/login", user);
@@ -19,7 +20,7 @@ export class AuthenticationService {
     localStorage.setItem("id_token", token);
     localStorage.setItem("user", JSON.stringify(user));
     this.authToken = token;
-    this.currentUser = user;
+    this._currentUser = user;
   }
 
   register(user) {

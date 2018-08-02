@@ -19,8 +19,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     public router: Router
-  ) {}
-  ngOnInit() {}
+  ) { }
+  ngOnInit() { }
 
   openSub() {
     if (this.isOpen) {
@@ -41,5 +41,6 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.authService.logoutUser();
     this.router.navigate([""]);
+    this.closeNav.emit(false);
   }
 }
