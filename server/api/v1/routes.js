@@ -45,8 +45,11 @@ router.post('/reset_password/:token', passResetController.reset_password);
 router.get('/project/:id', projectController.get_project_by_id)
 router.get('/projects', projectController.get_projects)
 router.get('/projects/user', authenticate, projectController.get_projects_by_user);
+router.post('/projects/publish', authenticate, projectController.create_and_publish_project);
+router.post('/projects/save', authenticate, projectController.create_and_save_project);
 router.delete('/project/:id', authenticate, projectController.delete_project);
-router.put('/project/:id', authenticate, projectController.publish_unpublish_project);
+router.put('/project/publish_unpublish/:id', authenticate, projectController.publish_unpublish_project);
+router.put('/project/update/:id', authenticate, projectController.update_project);
 
 /**
  * Categories

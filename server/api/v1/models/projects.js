@@ -57,7 +57,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     published_at: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
+      allowNull: true,
     },
     deleted_at: {
       type: DataTypes.DATE,
