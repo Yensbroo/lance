@@ -4,6 +4,12 @@
 const Bid = require('../models').bids;
 const Project = require('../models').projects;
 
+
+/**
+ * Validation
+ */
+const validateBidInput = require('../validation/bid');
+
 /**
  * Utilities
  */
@@ -21,6 +27,15 @@ exports.get_bids_by_project = (req, res) => {
 }
 
 exports.create_bid = (req, res) => {
+  const {
+    errors,
+    isValid
+  } = validateBidInput(req.body);
+
+  if (!isValid)  {
+    return res.status(400).json(errors);
+  }
+
   Project.findOne({
     where: {
       id: req.params.projectId
