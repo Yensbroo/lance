@@ -9,7 +9,7 @@ import { User } from '../models/user';
 export class AuthenticationService {
   public _currentUser: User;
   authToken: any;
-  apiUrl = "http://localhost:8000/api/v1";
+  private apiUrl = "http://localhost:8000/api/v1";
   constructor(private http: HttpClient) { }
 
   login(user) {

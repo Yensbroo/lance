@@ -18,6 +18,8 @@ import { OpdrachtComponent } from "./home/opdracht/opdracht.component";
 import { BiedenComponent } from "./home/bieden/bieden.component";
 import { CategoriesComponent } from "./home/categories/categories.component";
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { EffectsModule } from "../../../node_modules/@ngrx/effects";
+import { AuthEffects } from "./store/effects/auth.effects";
 
 @NgModule({
   declarations: [
@@ -36,9 +38,10 @@ import { AuthenticationModule } from "./authentication/authentication.module";
     AppRoutingModule,
     ProjectsModule,
     FormsModule,
-    AuthenticationModule
+    AuthenticationModule,
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
