@@ -9,9 +9,7 @@ module.exports = function isValidBidInput(data) {
 
   if (Validator.isEmpty(data.price)) {
     errors.price = "You cannot submit an empty bid";
-  }
-
-  if (!Validator.isInt(data.price)) {
+  } else if (!Validator.isInt(data.price)) {
     errors.price = "This is not a valid bid";
   }
 
