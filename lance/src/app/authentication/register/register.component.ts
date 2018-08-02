@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../core/services/authentication.service";
 import { Router } from "@angular/router";
+import { User } from '../../core/models/user';
 
 @Component({
   selector: "app-register",
@@ -8,29 +9,21 @@ import { Router } from "@angular/router";
   styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent implements OnInit {
-  full_name: String;
-  email: String;
-  password: String;
-  password2: String;
+  user: User = new User();
   message = "";
   data: any;
 
   constructor(
     private authService: AuthenticationService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onRegister() {
-    const user = {
-      full_name: this.full_name,
-      email: this.email,
-      password: this.password,
-      password2: this.password2
-    };
 
-    this.authService.register(user).subscribe(
+
+    this.authService.register(this.user).subscribe(
       res => {
         this.data = res;
         console.log(res);
