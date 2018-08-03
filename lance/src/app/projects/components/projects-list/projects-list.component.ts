@@ -10,8 +10,10 @@ import { ProjectService } from "../../../core/services/project.service";
 export class ProjectsListComponent implements OnInit {
   projects: Project[];
   copyProjects: Project[] = [];
+  descending: boolean = false;
   error: String;
-  constructor(private projectService: ProjectService) {}
+
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     this.getAllProjects();
@@ -27,16 +29,21 @@ export class ProjectsListComponent implements OnInit {
       );
   }
 
-  sortType(sort: String) {
-    if (sort === "name") {
-      this.projects = this.copyProjects.sort(this.sortByProjectName);
-      console.log(this.copyProjects);
-    }
-  }
+  // sortType(sort: String) {
+  //   if (sort === "name") {
+  //     this.projects = this.copyProjects.sort(this.sortByProjectName);
+  //     console.log(this.copyProjects);
+  //   }
+  // }
 
-  sortByProjectName(p1: Project, p2: Project) {
-    if (p1.title > p2.title) return 1;
-    else if (p1.title === p1.title) return 0;
-    else return -1;
+  sortByProjectName() {
+    if (this.descending) {
+      this.projects.sort((a, b) => 0 - (a.title > b.title ? 1 : -1))
+      this.descending = false;
+    } else {
+      this.projects.sort((a, b) => 0 - (a.title > b.title ? -1 : 1))
+      this.descending = true;
+    }
+    console.log(this.descending);
   }
 }
