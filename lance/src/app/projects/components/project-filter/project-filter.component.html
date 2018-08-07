@@ -4,9 +4,9 @@
     <dt>Vakgebieden</dt>
     <dd>
       <ul>
-        <li *ngFor="let category of categories">
+        <li *ngFor="let category of categories; let i = index">
           <label class="checkbox-container">{{category.name}}
-            <input type="checkbox">
+            <input type="checkbox" [checked]="selected === i" value="{{category.slug}}" (click)="sortByCategory($event)" (change)="selected = i">
             <span class="checkmark"></span>
           </label>
         </li>

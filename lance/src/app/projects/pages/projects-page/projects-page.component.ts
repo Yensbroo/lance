@@ -20,13 +20,17 @@ export class ProjectsPageComponent implements OnInit {
   ngOnInit() {
     this.getAllProjects();
     this.loadCategories();
+    console.log(this.projects);
   }
 
   getAllProjects() {
     this.projectService
       .getAllProjects()
       .subscribe(
-        projects => (this.projects = projects),
+        projects => {
+          this.projects = projects;
+          console.log(this.projects)
+        },
         err => (this.error = <any>err)
       );
   }
@@ -55,5 +59,10 @@ export class ProjectsPageComponent implements OnInit {
       this.projects.sort((a, b) => 0 - (a.budget > b.budget ? -1 : 1))
       this.descending = true;
     }
+  }
+
+  sortByCategory(e: any) {
+
+    this.projects = this.projects.filter(projects => projects.category.slug.toLocaleLowerCase().indexOf(e.target.value) !== -1)
   }
 }

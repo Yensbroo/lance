@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CategoryService } from '../../../core/services/category.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../../core/models/category';
+import { Project } from '../../../core/models/project';
 
 @Component({
   selector: 'app-project-filter',
@@ -8,7 +8,14 @@ import { Category } from '../../../core/models/category';
   styleUrls: ['./project-filter.component.scss']
 })
 export class ProjectFilterComponent {
+  selected = -1;
   @Input()
   categories: Category[];
+
+  @Output() sortByCat = new EventEmitter<any>();
+
+  sortByCategory(e) {
+    this.sortByCat.emit(e);
+  }
 
 }

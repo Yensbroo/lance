@@ -1,7 +1,7 @@
 <div class="lnc-projects">
   <div class="container">
     <div class="row lnc-projects__list">
-      <app-project-filter [categories]="categories" class="col-lg-3"></app-project-filter>
+      <app-project-filter [categories]="categories" (sortByCat)="sortByCategory($event)" class="col-lg-3"></app-project-filter>
       <app-projects-list [projects]="projects" (sortByName)="sortByProjectName()" (sortByBudget)="sortByProjectBudget()" class="col-lg-9"></app-projects-list>
     </div>
   </div>

@@ -21,6 +21,10 @@ export class ProjectService {
     return this.httpClient.get(this.apiUrl + "/project/" + id);
   }
 
+  getProjectsByCategory(slug: String) {
+    return this.httpClient.get<Array<Project>>(this.apiUrl + "/categories/topic/:slug" + slug);
+  }
+
   createProject() {
   }
 }
