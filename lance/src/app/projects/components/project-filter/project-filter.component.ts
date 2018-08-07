@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../core/models/category';
 
@@ -7,21 +7,8 @@ import { Category } from '../../../core/models/category';
   templateUrl: './project-filter.component.html',
   styleUrls: ['./project-filter.component.scss']
 })
-export class ProjectFilterComponent implements OnInit {
-
+export class ProjectFilterComponent {
+  @Input()
   categories: Category[];
-  error: String;
-
-  constructor(private categoryService: CategoryService) { }
-
-  ngOnInit() {
-    this.loadCategories();
-  }
-
-  loadCategories() {
-    this.categoryService.getCategories().subscribe(categories =>
-      (this.categories = categories),
-      err => (this.error = <any>err))
-  }
 
 }
