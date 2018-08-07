@@ -24,17 +24,9 @@ export class ProjectsListComponent implements OnInit {
       .getAllProjects()
       .subscribe(
         projects => (this.projects = projects),
-        err => (this.error = <any>err),
-        () => (this.copyProjects = this.projects)
+        err => (this.error = <any>err)
       );
   }
-
-  // sortType(sort: String) {
-  //   if (sort === "name") {
-  //     this.projects = this.copyProjects.sort(this.sortByProjectName);
-  //     console.log(this.copyProjects);
-  //   }
-  // }
 
   sortByProjectName() {
     if (this.descending) {
@@ -45,5 +37,15 @@ export class ProjectsListComponent implements OnInit {
       this.descending = true;
     }
     console.log(this.descending);
+  }
+
+  sortProjectByBudget() {
+    if (this.descending) {
+      this.projects.sort((a, b) => 0 - (a.budget > b.budget ? 1 : -1))
+      this.descending = false;
+    } else {
+      this.projects.sort((a, b) => 0 - (a.budget > b.budget ? -1 : 1))
+      this.descending = true;
+    }
   }
 }

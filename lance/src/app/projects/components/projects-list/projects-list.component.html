@@ -1,4 +1,4 @@
-<h2>Alle opdrachten</h2>
+<h2>{{projects.length}} opdrachten</h2>
 <div class="projects_sort">
   <input [(ngModel)]="searchText" type="text" class="searchBox">
 </div>
@@ -7,7 +7,9 @@
   <div class="sortTable">
     <p id="title" (click)="sortByProjectName()">Titel</p>
     <p id="end">Eindigt op</p>
-    <p id="budget">Budget</p>
+    <p id="budget" (click)="sortProjectByBudget()">Budget
+      <i class="fas fa-long-arrow-alt-up"></i>
+    </p>
   </div>
   <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects | searchProjects : searchText">
     <div class="project_info">
