@@ -9,7 +9,6 @@ import { ProjectService } from "../../../core/services/project.service";
 })
 export class ProjectsListComponent implements OnInit {
   projects: Project[];
-  copyProjects: Project[] = [];
   descending: boolean = false;
   error: String;
 

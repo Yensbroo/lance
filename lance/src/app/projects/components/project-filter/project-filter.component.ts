@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../../core/services/category.service';
+import { Category } from '../../../core/models/category';
 
 @Component({
   selector: 'app-project-filter',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectFilterComponent implements OnInit {
 
-  constructor() { }
+  categories: Category[];
+  error: String;
+
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe(categories =>
+      (this.categories = categories),
+      err => (this.error = <any>err))
   }
 
 }
