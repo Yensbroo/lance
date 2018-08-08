@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { of, Observable } from 'rxjs';
 import { map, tap, switchMap, catchError, mergeMap } from 'rxjs/operators';
-import { AuthActionTypes, Login, LoginSuccess, LogInFailure } from '../actions/auth.actions';
+import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure } from '../actions/auth.actions';
 
 import { AuthenticationService } from '../../core/services/authentication.service';
 @Injectable()
@@ -20,27 +20,11 @@ export class AuthEffects {
         map(user => {
           return new LoginSuccess({ token: user.token, email: payload.email })
         }),
-        catchError(() => of({ type: 'LOGIN_FAILURE' }))
+        catchError((error) => of(new LoginFailure({ error: error })))
       )
     )
     )
   )
-
-  // @Effect()
-  // LogIn: Observable<any> = this.actions
-  //   .ofType(AuthActionTypes.LOGIN)
-  //   .map((action: LogIn) => action.payload)
-  //   .switchMap(payload => {
-  //     return this.authService.login(payload.email, payload.password)
-  //       .map((user) => {
-  //         console.log(user);
-  //         return new LogInSuccess({ token: user.tokenKey, email: payload.email })
-  //       })
-  //       .catchError((error) => {
-  //         console.log(error);
-  //         return Observable.of(new LogInFailure({ error: error }));
-  //       })
-  //   });
 
   @Effect({ dispatch: false })
   LoginSuccess: Observable<any> = this.actions$.pipe(
@@ -49,6 +33,21 @@ export class AuthEffects {
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })
+  );
+
+  @Effect()
+  Register: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.REGISTER),
+    map((action: Register) => action.payload),
+    mergeMap(payload => (
+      this.authService.register(payload).pipe(
+        map(user => {
+          return new RegisterSuccess({ token: user.token, email: payload.email }),
+            this.router.navigateByUrl('/registered')
+        }),
+        catchError((error) => of(new RegisterFailure({ error: error })))
+      )
+    ))
   )
 
   constructor(

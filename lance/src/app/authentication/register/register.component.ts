@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Store } from '@ngrx/store'
 import { AuthenticationService } from "../../core/services/authentication.service";
 import { Router } from "@angular/router";
 import { User } from '../../core/models/user';
+import { AppState } from "../../store/app.state";
+import { Register } from "../../store/actions/auth.actions";
+
 
 @Component({
   selector: "app-register",
@@ -14,25 +18,18 @@ export class RegisterComponent implements OnInit {
   data: any;
 
   constructor(
-    private authService: AuthenticationService,
-    private router: Router
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() { }
 
   onRegister() {
-
-
-    this.authService.register(this.user).subscribe(
-      res => {
-        this.data = res;
-        console.log(res);
-        this.router.navigate(["registered"]);
-      },
-      err => {
-        this.message = err.error;
-        console.log(err);
-      }
-    );
+    const payload = {
+      full_name: this.user.full_name,
+      email: this.user.email,
+      password: this.user.password,
+      password2: this.user.password2
+    }
+    this.store.dispatch(new Register(payload))
   }
 }
