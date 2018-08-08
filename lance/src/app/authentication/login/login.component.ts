@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.user);
     const payload = {
       email: this.user.email,
       password: this.user.password

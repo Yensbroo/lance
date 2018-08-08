@@ -2,15 +2,21 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from '../models/user';
+import { Store } from "../../../../node_modules/@ngrx/store";
+import { AppState, selectAuthState } from "../../store/app.state";
+import { Observable } from "../../../../node_modules/rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthenticationService {
   public _currentUser: User;
+  getState: Observable<any>;
   authToken: any;
   private apiUrl = "http://localhost:8000/api/v1";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store<AppState>) {
+    this.getState = this.store.select(selectAuthState);
+  }
 
   login(email, password) {
     return this.http.post<User>(this.apiUrl + "/login", { email, password });
@@ -28,8 +34,9 @@ export class AuthenticationService {
   }
 
   getUser() {
-    const user = localStorage.getItem("user");
-    return JSON.parse(user);
+    this.getState.subscribe((state) => {
+      this._currentUser = state.user;
+    })
   }
 
   loggedIn() {

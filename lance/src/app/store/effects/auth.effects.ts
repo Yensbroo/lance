@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { of, Observable } from 'rxjs';
 import * as JWT from 'jwt-decode';
 import { map, tap, switchMap, catchError, mergeMap } from 'rxjs/operators';
-import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure, CurrentUser } from '../actions/auth.actions';
+import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure, CurrentUser, Logout } from '../actions/auth.actions';
 
 import { AuthenticationService } from '../../core/services/authentication.service';
 @Injectable()
@@ -18,8 +18,8 @@ export class AuthEffects {
     mergeMap(payload => (
       console.log(payload),
       this.authService.login(payload.email, payload.password).pipe(
-        map(user => {
-          return new LoginSuccess({ token: user.token, email: payload.email })
+        map((user: any) => {
+          return new LoginSuccess({ token: user.token, full_name: user.user.full_name, email: payload.email })
         }),
         catchError((error) => of(new LoginFailure({ error: error })))
       )
@@ -49,6 +49,14 @@ export class AuthEffects {
         catchError((error) => of(new RegisterFailure({ error: error })))
       )
     ))
+  )
+
+  @Effect({ dispatch: false })
+  Logout: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.LOGOUT),
+    tap(() => {
+      localStorage.removeItem('token');
+    }),
   )
 
 

@@ -12,6 +12,7 @@ import { User } from "../../models/user";
 import { Store } from "../../../../../node_modules/@ngrx/store";
 import { AppState } from "../../../store/app.state";
 import { Observable } from "../../../../../node_modules/rxjs";
+import { Logout } from "../../../store/actions/auth.actions";
 
 @Component({
   selector: "app-header",
@@ -19,9 +20,10 @@ import { Observable } from "../../../../../node_modules/rxjs";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  @Input() user: User[];
+  @Input() user: Observable<any>;
   @Input() isAuthenticated: boolean;
   @Output() sidebarToggle = new EventEmitter(true);
+
 
   constructor(private authService: AuthenticationService, public router: Router, private store: Store<AppState>) { }
 
@@ -51,7 +53,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logoutUser();
-    this.router.navigate([""]);
+    this.store.dispatch(new Logout);
   }
+
 }

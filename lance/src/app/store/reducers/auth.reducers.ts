@@ -21,10 +21,7 @@ export function reducer(state = initialState, action: All) {
       return {
         ...state,
         isAuthenticated: true,
-        user: {
-          token: action.payload.token,
-          email: action.payload.email
-        },
+        user: action.payload,
         errorMessage: null
       };
     }
@@ -40,6 +37,9 @@ export function reducer(state = initialState, action: All) {
         isAuthenticated: true,
         user: action.payload
       };
+    }
+    case AuthActionTypes.LOGOUT: {
+      return initialState
     }
     default: {
       return state;

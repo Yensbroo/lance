@@ -20,10 +20,10 @@ export class AppComponent {
   isOpen = false;
   getState: Observable<any>;
   isAuthenticated: false;
-  user: User[] = [];
+  user: Observable<any>;
 
   constructor(private store: Store<AppState>) {
-    this.getState = this.store.select(selectAuthState)
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit() {
@@ -32,15 +32,26 @@ export class AppComponent {
     if (localStorage.token) {
       const self = this
       this.setUser().then(() => {
-        self.getState.subscribe((state) => {
-          this.isAuthenticated = state.isAuthenticated;
+        this.getState.subscribe((state) => {
           this.user = state.user;
-          console.log(this.user);
+          this.isAuthenticated = state.isAuthenticated
         })
       })
     }
+  }
+
+  ngOnChange() {
 
   }
+
+  catchState() {
+    this.getState.subscribe((state) => {
+      this.isAuthenticated = state.isAuthenticated;
+      this.user = state.user;
+      console.log(this.user);
+    })
+  }
+
 
 
   setUser() {
