@@ -8,6 +8,9 @@ import { Project } from "../../../core/models/project";
   styleUrls: ["./projects-list.component.scss"]
 })
 export class ProjectsListComponent {
+
+
+
   @Input()
   projects: Project[];
 

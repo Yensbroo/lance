@@ -10,17 +10,16 @@ import { CategoryService } from '../../../core/services/category.service'
   styleUrls: ['./projects-page.component.scss']
 })
 export class ProjectsPageComponent implements OnInit {
-  projects: Project[];
+  projects: Project[] = [];
   categories: Category[];
   descending: boolean = false;
   error: String;
 
   constructor(private projectService: ProjectService, private categoryService: CategoryService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAllProjects();
     this.loadCategories();
-    console.log(this.projects);
   }
 
   getAllProjects() {
@@ -29,7 +28,6 @@ export class ProjectsPageComponent implements OnInit {
       .subscribe(
         projects => {
           this.projects = projects;
-          console.log(this.projects)
         },
         err => (this.error = <any>err)
       );
@@ -62,7 +60,9 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   sortByCategory(e: any) {
-
+    if (!e) {
+      return this.projects;
+    }
     this.projects = this.projects.filter(projects => projects.category.slug.toLocaleLowerCase().indexOf(e.target.value) !== -1)
   }
 }

@@ -11,7 +11,7 @@
       <i class="fas fa-long-arrow-alt-up"></i>
     </p>
   </div>
-  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects | searchProjects : searchText">
+  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects | searchProjects: searchText">
     <div class="project_info">
       <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
       <p>{{project.body}}</p>
