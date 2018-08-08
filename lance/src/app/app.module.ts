@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
  */
 import { CoreModule } from "./core/core.module";
 import { MaterialModule } from "./material/material.module";
-import { StoreModule } from '@ngrx/store'
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store'
 import { AppRoutingModule } from "./app-routing.module";
 import { ProjectsModule } from "./projects/projects.module";
+import { localStorageSync } from 'ngrx-store-localstorage'
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -30,6 +31,17 @@ import { BiedenComponent } from "./home/bieden/bieden.component";
 import { CategoriesComponent } from "./home/categories/categories.component";
 import { environment } from "../environments/environment.prod";
 
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync(
+    {
+      keys: ['token'],
+      rehydrate: true
+    }
+  )(reducer)
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +59,7 @@ import { environment } from "../environments/environment.prod";
     ProjectsModule,
     FormsModule,
     AuthenticationModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production

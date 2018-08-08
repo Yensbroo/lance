@@ -40,10 +40,10 @@ exports.create_user = (req, res) => {
 
 
   User.find({
-      where: {
-        email: req.body.email
-      }
-    })
+    where: {
+      email: req.body.email
+    }
+  })
     .then((user) => {
       if (user) {
         return res.status(400).json({
@@ -56,24 +56,24 @@ exports.create_user = (req, res) => {
 
 
       User.create({
-          full_name: req.body.full_name,
-          email: req.body.email,
-          password: req.body.password,
-          role_id: 2,
-          email_confirmed: false,
-          confirmation_token: email_token
-        }).then((user) => {
-          //email settings
-          const subject = `${user.full_name}, please verify your email!`;
-          const text = 'Please verify your email';
-          const email_body = `<h2>Verify your email</h2><br/>
+        full_name: req.body.full_name,
+        email: req.body.email,
+        password: req.body.password,
+        role_id: 2,
+        email_confirmed: false,
+        confirmation_token: email_token
+      }).then((user) => {
+        //email settings
+        const subject = `${user.full_name}, please verify your email!`;
+        const text = 'Please verify your email';
+        const email_body = `<h2>Verify your email</h2><br/>
       <a href="http://localhost:8000/verify/${user.confirmation_token}">Click this link to verify your email</a>`;
 
-          //send email with verification token to user
-          send(user.email, subject, text, email_body);
+        //send email with verification token to user
+        send(user.email, subject, text, email_body);
 
-          res.json(user);
-        })
+        res.json(user);
+      })
         .catch(err => res.json(err));
     })
 }
@@ -115,8 +115,10 @@ exports.user_login = (req, res) => {
 
         //create a json web token
         jwt.sign({
-            id: user.id
-          }, keys.secretOrKey, {
+          id: user.id,
+          full_name: user.full_name,
+          email: user.email
+        }, keys.secretOrKey, {
             expiresIn: 10000
           },
           (err, token) => {
@@ -145,12 +147,12 @@ exports.confirm_user = (req, res, next) => {
   User.update({
     email_confirmed: true
   }, {
-    where: {
-      confirmation_token: req.params.id
-    }
-  }).then(() => {
-    res.json({
-      succes: true
-    });
-  })
+      where: {
+        confirmation_token: req.params.id
+      }
+    }).then(() => {
+      res.json({
+        succes: true
+      });
+    })
 }

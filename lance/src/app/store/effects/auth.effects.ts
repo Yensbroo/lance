@@ -3,8 +3,9 @@ import { Router } from '@angular/router'
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { of, Observable } from 'rxjs';
+import * as JWT from 'jwt-decode';
 import { map, tap, switchMap, catchError, mergeMap } from 'rxjs/operators';
-import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure } from '../actions/auth.actions';
+import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Register, RegisterSuccess, RegisterFailure, CurrentUser } from '../actions/auth.actions';
 
 import { AuthenticationService } from '../../core/services/authentication.service';
 @Injectable()
@@ -49,6 +50,7 @@ export class AuthEffects {
       )
     ))
   )
+
 
   constructor(
     private actions$: Actions,

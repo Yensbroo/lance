@@ -14,11 +14,11 @@
     <div class="lnc-user">
       <a routerLink="opdrachten">Opdrachten</a>
       <a href="">Plaats een opdracht</a>
-      <a *ngIf="authService.loggedIn()" routerLink="login">Login</a>
-      <a *ngIf="authService.loggedIn()" routerLink="register" id="register">Registreer</a>
+      <a *ngIf="!isAuthenticated" routerLink="login">Login</a>
+      <a *ngIf="!isAuthenticated" routerLink="register" id="register">Registreer</a>
       <div class="header-dropdown">
         <div class="header-dropbtn">
-          <a *ngIf="!authService.loggedIn()" id="user">{{ authService._currentUser?.full_name }}</a>
+          <a *ngIf="isAuthenticated" id="user">{{ user.full_name }}</a>
         </div>
         <div class="header-dropdown__content">
           <ul>

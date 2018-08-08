@@ -34,6 +34,13 @@ export function reducer(state = initialState, action: All) {
         errorMessage: 'test'
       };
     }
+    case AuthActionTypes.CURRENT_USER: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload
+      };
+    }
     default: {
       return state;
     }

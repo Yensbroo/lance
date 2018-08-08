@@ -3,11 +3,15 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  HostListener
+  HostListener,
+  Input
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../core/services/authentication.service";
 import { User } from "../../models/user";
+import { Store } from "../../../../../node_modules/@ngrx/store";
+import { AppState } from "../../../store/app.state";
+import { Observable } from "../../../../../node_modules/rxjs";
 
 @Component({
   selector: "app-header",
@@ -15,10 +19,11 @@ import { User } from "../../models/user";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
+  @Input() user: User[];
+  @Input() isAuthenticated: boolean;
   @Output() sidebarToggle = new EventEmitter(true);
-  public user: String;
 
-  constructor(private authService: AuthenticationService, public router: Router) { }
+  constructor(private authService: AuthenticationService, public router: Router, private store: Store<AppState>) { }
 
   public prevScroll = window.pageYOffset;
 
@@ -37,13 +42,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    const data = this.authService.getUser();
-    this.user = data;
   }
 
-  get userName(): User {
-    return this.authService._currentUser;
-  }
 
 
   sidebarOpen() {
