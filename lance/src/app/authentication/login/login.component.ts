@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../core/services/authentication.service";
 import { Router } from "@angular/router";
+import { Store } from '@ngrx/store';
 import { User } from '../../core/models/user';
+import { AppState } from '../../store/app.state';
+import { Login } from '../../store/actions/auth.actions'
 
 @Component({
   selector: "app-login",
@@ -10,25 +13,19 @@ import { User } from '../../core/models/user';
 })
 export class LoginComponent implements OnInit {
   user: User = new User();
-  message = "";
-  data: any;
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) { }
 
-  ngOnInit() { }
+  constructor(private store: Store<AppState>) {
+  }
 
-  onLogin() {
-    this.authService.login(this.user).subscribe(
-      res => {
-        this.data = res;
-        this.authService.storeUser(this.data.token, this.data.user);
-        this.router.navigate([""]);
-      },
-      err => {
-        this.message = err.error;
-      }
-    );
+  ngOnInit() {
+  }
+
+  onSubmit(): void {
+    console.log(this.user);
+    const payload = {
+      email: this.user.email,
+      password: this.user.password
+    };
+    this.store.dispatch(new Login(payload));
   }
 }

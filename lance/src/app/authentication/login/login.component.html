@@ -4,20 +4,20 @@
       <div class="auth__wrapper">
         <h1>Login</h1>
         <hr>
-        <form (submit)="onLogin()" class="login">
+        <form (submit)="onSubmit()" class="login">
           <div class="form-group">
             <input type="email" [(ngModel)]="user.email" name="email" required>
             <label for="email" class="floating-label">Email</label>
-            <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
-            <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p>
+            <!-- <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
+            <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p> -->
           </div>
           <div class="form-group">
             <input type="password" [(ngModel)]="user.password" name="password" required>
             <label for="password" class="floating-label">Password</label>
-            <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
-            <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p>
+            <!-- <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
+            <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p> -->
           </div>
-          <button type="submit ">Login</button>
+          <button type="submit">Login</button>
           <span>Wachtwoord vergeten? Klik hier</span>
         </form>
       </div>

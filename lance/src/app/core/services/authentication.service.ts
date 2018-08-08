@@ -12,8 +12,8 @@ export class AuthenticationService {
   private apiUrl = "http://localhost:8000/api/v1";
   constructor(private http: HttpClient) { }
 
-  login(user) {
-    return this.http.post(this.apiUrl + "/login", user);
+  login(email, password) {
+    return this.http.post<User>(this.apiUrl + "/login", { email, password });
   }
 
   storeUser(token, user) {
@@ -24,7 +24,7 @@ export class AuthenticationService {
   }
 
   register(user) {
-    return this.http.post(this.apiUrl + "/register", user);
+    return this.http.post<User>(this.apiUrl + "/register", user);
   }
 
   getUser() {

@@ -13,4 +13,4 @@ import { JwtModule } from "@auth0/angular-jwt";
   declarations: [HeaderComponent, SidebarComponent, FooterComponent],
   exports: [HeaderComponent, SidebarComponent]
 })
-export class CoreModule {}
+export class CoreModule { }
