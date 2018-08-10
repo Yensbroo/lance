@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Category } from '../../../core/models/category';
+import { Project } from '../../../core/models/project';
 
 @Component({
   selector: 'app-project-filter',
   templateUrl: './project-filter.component.html',
   styleUrls: ['./project-filter.component.scss']
 })
-export class ProjectFilterComponent implements OnInit {
+export class ProjectFilterComponent {
+  selected = -1;
+  @Input()
+  categories: Category[];
 
-  constructor() { }
+  @Output() sortByCat = new EventEmitter<any>();
 
-  ngOnInit() {
+  sortByCategory(e) {
+    this.sortByCat.emit(e);
   }
 
 }

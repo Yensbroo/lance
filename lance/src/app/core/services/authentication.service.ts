@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from '../models/user';
 import { Store } from "../../../../node_modules/@ngrx/store";
-import { AppState, selectAuthState } from "../../store/app.state";
+import { AppState } from "../../store/app.state";
 import { Observable } from "../../../../node_modules/rxjs";
 
 @Injectable({
@@ -14,11 +14,10 @@ export class AuthenticationService {
   getState: Observable<any>;
   authToken: any;
   private apiUrl = "http://localhost:8000/api/v1";
-  constructor(private http: HttpClient, private store: Store<AppState>) {
-    this.getState = this.store.select(selectAuthState);
+  constructor(private http: HttpClient) {
   }
 
-  login(email, password) {
+  login(email, password): Observable<User> {
     return this.http.post<User>(this.apiUrl + "/login", { email, password });
   }
 

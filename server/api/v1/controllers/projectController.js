@@ -87,6 +87,7 @@ exports.get_project_by_id = (req, res) => {
     .catch(err => res.json(err));
 }
 
+
 exports.get_projects_by_user = (req, res) => {
   Project.findAll({
       where: {

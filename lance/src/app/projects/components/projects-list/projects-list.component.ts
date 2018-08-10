@@ -1,26 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Project } from "../../../core/models/project";
-import { ProjectService } from "../../../core/services/project.service";
+
 
 @Component({
   selector: "app-projects-list",
   templateUrl: "./projects-list.component.html",
   styleUrls: ["./projects-list.component.scss"]
 })
-export class ProjectsListComponent implements OnInit {
-  public projects: Array<Project>;
-  constructor(private projectService: ProjectService) {}
+export class ProjectsListComponent {
 
-  ngOnInit() {
-    this.getAllProjects();
+
+
+  @Input()
+  projects: Project[];
+
+  @Output() sortByName = new EventEmitter<Project>();
+  @Output() sortByBudget = new EventEmitter<Project>();
+
+  sortByProjectName() {
+    this.sortByName.emit();
   }
 
-  getAllProjects() {
-    this.projectService.getAllProjects().subscribe(
-      data => {
-        this.projects = data;
-      },
-      err => console.log(err)
-    );
+  sortByProjectBudget() {
+    this.sortByBudget.emit();
   }
 }

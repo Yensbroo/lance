@@ -3,7 +3,7 @@ import { AuthenticationService } from "../../core/services/authentication.servic
 import { Router } from "@angular/router";
 import { Store, select } from '@ngrx/store';
 import { User } from '../../core/models/user';
-import { AppState, selectAuthState } from '../../store/app.state';
+import { AppState } from '../../store/app.state';
 import { Login } from '../../store/actions/auth.actions'
 import { Observable } from "../../../../node_modules/rxjs";
 

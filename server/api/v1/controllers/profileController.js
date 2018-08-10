@@ -2,7 +2,6 @@
  * Models
  */
 const Profile = require('../models').profiles;
-const Review = require('../models').reviews;
 const User = require('../models').users;
 
 exports.create_profile = (req, res) => {

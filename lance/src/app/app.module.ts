@@ -17,7 +17,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from "./store/effects/auth.effects";
-import { reducers } from './store/app.state';
+import { reducers, metaReducers } from './store/reducers';
 
 /**
  * Components
@@ -30,17 +30,10 @@ import { OpdrachtComponent } from "./home/opdracht/opdracht.component";
 import { BiedenComponent } from "./home/bieden/bieden.component";
 import { CategoriesComponent } from "./home/categories/categories.component";
 import { environment } from "../environments/environment.prod";
+import { ProjectEffects } from "./store/effects/project.effects";
+import { ProjectService } from "./core/services/project.service";
 
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync(
-    {
-      keys: ['token'],
-      rehydrate: true
-    }
-  )(reducer)
-}
 
-const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -64,9 +57,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, ProjectEffects])
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, ProjectService],
   bootstrap: [AppComponent]
 })
 

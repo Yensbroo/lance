@@ -10,11 +10,13 @@ import { LoginComponent } from "./authentication/login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./authentication/register/register.component";
 import { RegisteredComponent } from "./authentication/registered/registered.component";
+import { CreateProjectPageComponent } from "./projects/pages/create-project-page/create-project-page.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "opdrachten", component: ProjectsPageComponent },
   { path: "opdracht/:id", component: ProjectPageComponent },
+  { path: "opdracht/create", component: CreateProjectPageComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "registered", component: RegisteredComponent }
@@ -25,4 +27,4 @@ const routes: Routes = [
   declarations: [],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

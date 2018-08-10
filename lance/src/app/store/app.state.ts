@@ -1,12 +1,27 @@
-import * as auth from './reducers/auth.reducers';
-import { createFeatureSelector, ActionReducerMap } from '@ngrx/store';
+import { Project } from '../core/models/project';
+import { User } from '../core/models/user';
+import * as fromAuthReducer from '../store/reducers/auth.reducers';
+import * as fromProjectReducer from '../store/reducers/project.reducers';
+import * as fromErrorReducer from '../store/reducers/error.reducers'
+
 
 export interface AppState {
-  auth: auth.State;
+  authState: AuthState
+  projectState: ProjectState;
+  error: ErrorState;
 }
 
-export const reducers: ActionReducerMap<AppState> = {
-  auth: auth.reducer
+export interface ProjectState {
+  projects: Project[];
+  project: Project[];
 }
 
-export const selectAuthState = createFeatureSelector<AppState>('auth');
+export interface AuthState {
+  user: User[],
+  isAuthenticated: boolean,
+  errorMessage: String
+}
+
+export interface ErrorState {
+  message: String;
+}

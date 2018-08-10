@@ -1,21 +1,16 @@
 import { User } from '../../core/models/user';
-import { State } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthActionTypes, All } from '../actions/auth.actions';
+import { AuthState, AppState } from '../app.state';
 
-export const initialState = {
+export const initialState: AuthState = {
   isAuthenticated: false,
-  user: null,
+  user: [],
   errorMessage: null
 }
 
-export interface State {
-  isAuthenticated: boolean;
-  user: User | null;
-  errorMessage: null;
 
-}
-
-export function reducer(state = initialState, action: All) {
+export function reducer(state = initialState, action: All): AuthState {
   switch (action.type) {
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
@@ -46,3 +41,10 @@ export function reducer(state = initialState, action: All) {
     }
   }
 }
+
+export const selectAuthState = createFeatureSelector<AuthState>('authState');
+
+export const getAuth = createSelector(
+  selectAuthState,
+  (state: AuthState) => state
+)

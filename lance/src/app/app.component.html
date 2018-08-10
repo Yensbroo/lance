@@ -1,4 +1,4 @@
-<app-header (sidebarToggle)="openNav($event)" [user]="user" [isAuthenticated]="isAuthenticated">
+<app-header (sidebarToggle)="openNav($event)" [user]="user" [isAuthenticated]="isAuthenticated" ng-if="router.url !== '/opdracht/create'">
 </app-header>
 <app-sidebar class="lnc-sidenav" [class.sidenav-open]="isOpen" (closeNav)="closeNav()"></app-sidebar>
 <div class="lnc-sidenav__overlay" (click)="closeNav()" [class.visible]="isOpen"></div>

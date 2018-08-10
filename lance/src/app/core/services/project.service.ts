@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { map } from 'rxjs/operators'
 
 import { Project } from "../models/project";
 
@@ -9,7 +10,7 @@ import { Project } from "../models/project";
 })
 export class ProjectService {
   apiUrl = "http://localhost:8000/api/v1";
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAllProjects() {
     return this.httpClient.get<Array<Project>>(
@@ -19,5 +20,12 @@ export class ProjectService {
 
   getProjectById(id: String) {
     return this.httpClient.get(this.apiUrl + "/project/" + id);
+  }
+
+  getProjectsByCategory(slug: String) {
+    return this.httpClient.get<Array<Project>>(this.apiUrl + "/categories/topic/:slug" + slug);
+  }
+
+  createProject() {
   }
 }
