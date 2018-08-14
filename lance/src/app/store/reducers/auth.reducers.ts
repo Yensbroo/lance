@@ -1,14 +1,13 @@
-import { User } from '../../core/models/user';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthActionTypes, All } from '../actions/auth.actions';
-import { AuthState, AppState } from '../app.state';
+import { User } from "../../core/models/user";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { AuthActionTypes, All } from "../actions/auth.actions";
+import { AuthState, AppState } from "../app.state";
 
 export const initialState: AuthState = {
   isAuthenticated: false,
   user: [],
   errorMessage: null
-}
-
+};
 
 export function reducer(state = initialState, action: All): AuthState {
   switch (action.type) {
@@ -23,7 +22,7 @@ export function reducer(state = initialState, action: All): AuthState {
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
-        errorMessage: 'test'
+        errorMessage: "test"
       };
     }
     case AuthActionTypes.CURRENT_USER: {
@@ -34,7 +33,7 @@ export function reducer(state = initialState, action: All): AuthState {
       };
     }
     case AuthActionTypes.LOGOUT: {
-      return initialState
+      return initialState;
     }
     default: {
       return state;
@@ -42,9 +41,9 @@ export function reducer(state = initialState, action: All): AuthState {
   }
 }
 
-export const selectAuthState = createFeatureSelector<AuthState>('authState');
+export const selectAuthState = createFeatureSelector<AuthState>("authState");
 
 export const getAuth = createSelector(
   selectAuthState,
   (state: AuthState) => state
-)
+);
