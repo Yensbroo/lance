@@ -21,7 +21,7 @@ export class AppComponent {
   user: Observable<any>;
 
   constructor(private store: Store<AppState>) {
-    this.user = this.store.select(fromReducer.getAuth);
+    this.getState = this.store.select(fromReducer.getAuth);
   }
 
   ngOnInit() {
