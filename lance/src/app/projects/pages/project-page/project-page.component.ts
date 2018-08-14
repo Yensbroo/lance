@@ -23,6 +23,7 @@ export class ProjectPageComponent implements OnInit {
   getUser: Observable<any>
   isAuthenticated: boolean;
   user: User[];
+  countdownTime: String;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private store: Store<AppState>) {
     this.getProject = store.select(fromProjectReducer.getProjects);
@@ -36,7 +37,7 @@ export class ProjectPageComponent implements OnInit {
         this.project = data.project;
       })
     })
-
+    // this.startCountdown(this.project.project_end);
   }
 
   setUser() {
@@ -54,8 +55,26 @@ export class ProjectPageComponent implements OnInit {
   }
 
 
-  startCountdown() {
-    const endDate = this.project;
-    console.log(endDate);
+  startCountdown(endDate) {
+    let end = endDate;
+
+    let x = setInterval(() => {
+      let now = new Date().getTime();
+      let distance = end - now;
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      this.countdownTime = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(x);
+
+        this.countdownTime = "Dit project is verlopen"
+      }
+    }, 1000)
+
   }
 }

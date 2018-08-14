@@ -14,10 +14,10 @@ export class ProjectDetailComponent implements OnInit {
   @Input() project: Project[];
   @Input() isAuthenticated: boolean;
   @Input() user: User[];
-  @Output() startTimer = new EventEmitter<Project>();
+  @Input() countdownTime: String;
 
   ngOnInit() {
-    this.startCountdown();
+    console.log(this.project);
   }
   startCountdown() {
     this.startTimer.emit();

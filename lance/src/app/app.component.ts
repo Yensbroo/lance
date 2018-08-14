@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import * as JWT from 'jwt-decode'
 import { AuthState, AppState } from "./store/app.state";
 import { AuthActionTypes } from "./store/actions/auth.actions";
@@ -20,16 +20,15 @@ export class AppComponent {
   isOpen = false;
   getState: Observable<any>;
   isAuthenticated: false;
-  user: Observable<User[]>;
+  user: Observable<any>;
 
   constructor(private store: Store<AppState>) {
-    this.getState = store.select(fromReducer.getAuth)
+    this.user = this.store.pipe(select(fromReducer.getAuth))
   }
 
 
   ngOnInit() {
     this.isOpen = false;
-
     if (localStorage.token) {
       this.setUser().then(() => {
         this.getState.subscribe((user) => {
