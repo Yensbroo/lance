@@ -40,20 +40,6 @@ export class AppComponent {
     }
   }
 
-  ngOnChange() {
-
-  }
-
-  catchState() {
-    this.getState.subscribe((state) => {
-      this.isAuthenticated = state.isAuthenticated;
-      this.user = state.user;
-      console.log(this.user);
-    })
-  }
-
-
-
   setUser() {
     return new Promise((resolve, reject) => {
       const token = localStorage.getItem('token');
@@ -61,8 +47,8 @@ export class AppComponent {
       this.store.dispatch({ type: AuthActionTypes.CURRENT_USER, payload: decoded });
       resolve();
     })
-
   }
+
   openNav(e) {
     this.isOpen = e;
     console.log(this.isOpen);
