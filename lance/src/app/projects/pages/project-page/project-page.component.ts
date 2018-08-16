@@ -162,7 +162,6 @@ export class ProjectPageComponent implements OnInit {
           this.projectEnd = new Date(this.project.project_end).getTime();
           this.countdownService.countdown().subscribe(
             t => {
-              var now = new Date();
               this.countdownTime = this.format(t);
             },
             null,
