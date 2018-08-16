@@ -23,11 +23,11 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     project_start: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false
     },
     project_end: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false
     },
     budget: {

@@ -1,14 +1,12 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
-import * as JWT from 'jwt-decode'
+import * as JWT from "jwt-decode";
 import { AuthState, AppState } from "./store/app.state";
 import { AuthActionTypes } from "./store/actions/auth.actions";
-import * as fromReducer from './store/reducers/auth.reducers';
+import * as fromReducer from "./store/reducers/auth.reducers";
 import { User } from "./core/models/user";
 import { map } from "../../node_modules/rxjs/operators";
-
-
 
 @Component({
   selector: "app-root",
@@ -23,29 +21,31 @@ export class AppComponent {
   user: Observable<any>;
 
   constructor(private store: Store<AppState>) {
-    this.user = this.store.pipe(select(fromReducer.getAuth))
+    this.getState = this.store.pipe(select(fromReducer.getAuth));
   }
-
 
   ngOnInit() {
     this.isOpen = false;
-    if (localStorage.token) {
+    if (localStorage.getItem("token")) {
       this.setUser().then(() => {
-        this.getState.subscribe((user) => {
+        this.getState.subscribe(user => {
           this.user = user.user;
-          this.isAuthenticated = user.isAuthenticated
-        })
-      })
+          this.isAuthenticated = user.isAuthenticated;
+        });
+      });
     }
   }
 
   setUser() {
     return new Promise((resolve, reject) => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const decoded = JWT(token);
-      this.store.dispatch({ type: AuthActionTypes.CURRENT_USER, payload: decoded });
+      this.store.dispatch({
+        type: AuthActionTypes.CURRENT_USER,
+        payload: decoded
+      });
       resolve();
-    })
+    });
   }
 
   openNav(e) {

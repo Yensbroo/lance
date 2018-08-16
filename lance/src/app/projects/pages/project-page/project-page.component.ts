@@ -1,80 +1,183 @@
-import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../../core/services/project.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
-import { Project } from '../../../core/models/project';
-import { Store } from '../../../../../node_modules/@ngrx/store';
-import { AppState } from '../../../store/app.state';
-import { Observable } from '../../../../../node_modules/rxjs';
-import * as fromProjectReducer from '../../../store/reducers/project.reducers';
-import * as fromAuthReducer from '../../../store/reducers/auth.reducers';
-import { ProjectActionTypes } from '../../../store/actions/project.actions';
-import { User } from '../../../core/models/user';
+import { Component, OnInit } from "@angular/core";
+import { ProjectService } from "../../../core/services/project.service";
+import { ActivatedRoute } from "@angular/router";
+import { IProject } from "../../../core/models/project";
+import { Store, select } from "@ngrx/store";
+import { AppState } from "../../../store/app.state";
+import { Observable, timer } from "rxjs";
+import { take, map } from "rxjs/operators";
+import * as moment from "moment";
+import "moment/locale/nl-be";
+import "moment-precise-range-plugin";
+import * as fromProjectReducer from "../../../store/reducers/project.reducers";
+import * as fromAuthReducer from "../../../store/reducers/auth.reducers";
+import { ProjectActionTypes } from "../../../store/actions/project.actions";
+import { User } from "../../../core/models/user";
+import { CountdownService } from "../../../core/services/countDown.service";
 
 @Component({
-  selector: 'app-project-page',
-  templateUrl: './project-page.component.html',
-  styleUrls: ['./project-page.component.scss']
+  selector: "app-project-page",
+  templateUrl: "./project-page.component.html",
+  styleUrls: ["./project-page.component.scss"]
 })
 export class ProjectPageComponent implements OnInit {
-
-  project: Observable<Project[]>;
+  project: IProject;
   error: String;
-  getProject: Observable<any>
-  getUser: Observable<any>
+  getProject: Observable<any>;
+  getUser: Observable<any>;
   isAuthenticated: boolean;
   user: User[];
-  countdownTime: String;
+  countdownTime;
+  count;
+  projectEnd: number;
 
-  constructor(private projectService: ProjectService, private route: ActivatedRoute, private store: Store<AppState>) {
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private countdownService: CountdownService
+  ) {
     this.getProject = store.select(fromProjectReducer.getProjects);
     this.getUser = store.select(fromAuthReducer.getAuth);
   }
 
   ngOnInit() {
     this.setUser();
-    this.loadProject().then(() => {
-      this.getProject.subscribe((data) => {
-        this.project = data.project;
-      })
-    })
-    // this.startCountdown(this.project.project_end);
+    this.loadProject();
+    this.setProject();
+    this.startCountdown();
   }
 
   setUser() {
-    this.getUser.subscribe((data) => {
+    this.getUser.subscribe(data => {
       this.user = data.user;
       this.isAuthenticated = data.isAuthenticated;
-      console.log(this.isAuthenticated);
-    })
+    });
   }
   loadProject() {
     return new Promise((resolve, reject) => {
-      this.store.dispatch({ type: ProjectActionTypes.GET_PROJECT, payload: this.route.snapshot.params['id'] })
-      resolve()
-    })
+      this.store.dispatch({
+        type: ProjectActionTypes.GET_PROJECT,
+        payload: this.route.snapshot.params["id"]
+      });
+      resolve();
+    });
   }
 
+  format(t) {
+    const today = new Date().getTime();
+    const end = moment(new Date(t));
+    const now = moment(new Date());
+    const distance = t - today;
+    console.log(distance);
+    const years = end.diff(now, "year");
+    now.add(years, "years");
 
-  startCountdown(endDate) {
-    let end = endDate;
+    const months = end.diff(now, "months");
+    now.add(months, "months");
 
-    let x = setInterval(() => {
-      let now = new Date().getTime();
-      let distance = end - now;
+    const weeks = end.diff(now, "weeks");
+    now.add(weeks, "days");
 
-      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const days = end.diff(now, "days");
+    now.add(days, "days");
 
-      this.countdownTime = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    const hours = end.diff(now, "hours");
+    now.add(hours, "hours");
 
-      if (distance < 0) {
-        clearInterval(x);
+    const minutes = end.diff(now, "minutes");
+    now.add(minutes, "minutes");
 
-        this.countdownTime = "Dit project is verlopen"
-      }
-    }, 1000)
+    const seconds = end.diff(now, "seconds");
+    now.add(seconds, "seconds");
+    if (distance >= 31557600000) {
+      return [
+        years +
+          " jaar " +
+          months +
+          " maanden " +
+          weeks +
+          " weken " +
+          days +
+          " dagen " +
+          hours +
+          " uur " +
+          minutes +
+          " minuten " +
+          seconds +
+          " seconden"
+      ];
+    } else if (distance >= 2629800000 && distance < 31557600000) {
+      return [
+        months +
+          " maanden " +
+          weeks +
+          " weken " +
+          days +
+          " dagen " +
+          hours +
+          " uur " +
+          minutes +
+          " minuten " +
+          seconds +
+          " seconden"
+      ];
+    } else if (distance <= 2629800000 && distance > 604800017) {
+      return [
+        weeks +
+          " weken " +
+          days +
+          " dagen " +
+          hours +
+          " uur " +
+          minutes +
+          " minuten " +
+          seconds +
+          " seconden"
+      ];
+    } else if (distance >= 86400000 && distance < 604800017) {
+      return [
+        days +
+          " dagen " +
+          hours +
+          " uur " +
+          minutes +
+          " minuten " +
+          seconds +
+          " seconden"
+      ];
+    } else if (distance >= 3600000 && distance < 86400000) {
+      return [hours + " uur " + minutes + " minuten " + seconds + " seconden"];
+    } else if (distance >= 60000 && distance < 3600000) {
+      return [minutes + " minuten " + seconds + " seconden"];
+    } else if (distance >= 1000 && distance < 60000) {
+      return [seconds + " seconden"];
+    }
+  }
 
+  setProject() {
+    return new Promise((resolve, reject) => {
+      this.getProject.subscribe(
+        project => {
+          this.project = project.project;
+          this.projectEnd = new Date(this.project.project_end).getTime();
+          this.countdownService.countdown().subscribe(
+            t => {
+              var now = new Date();
+              this.countdownTime = this.format(t);
+            },
+            null,
+            () => (this.countdownTime = "Dit project is afgelopen")
+          );
+          this.countdownService.start(this.projectEnd);
+        },
+        err => console.log(err)
+      );
+      resolve();
+    });
+  }
+
+  startCountdown() {
+    this.getProject.subscribe(data => {});
   }
 }

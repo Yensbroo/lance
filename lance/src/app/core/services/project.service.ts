@@ -1,19 +1,19 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { map } from 'rxjs/operators'
+import { map } from "rxjs/operators";
 
-import { Project } from "../models/project";
+import { IProject } from "../models/project";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectService {
   apiUrl = "http://localhost:8000/api/v1";
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getAllProjects() {
-    return this.httpClient.get<Array<Project>>(
+    return this.httpClient.get<Array<IProject>>(
       "http://localhost:8000/api/v1/projects"
     );
   }
@@ -23,9 +23,10 @@ export class ProjectService {
   }
 
   getProjectsByCategory(slug: String) {
-    return this.httpClient.get<Array<Project>>(this.apiUrl + "/categories/topic/:slug" + slug);
+    return this.httpClient.get<Array<IProject>>(
+      this.apiUrl + "/categories/topic/:slug" + slug
+    );
   }
 
-  createProject() {
-  }
+  createProject() {}
 }

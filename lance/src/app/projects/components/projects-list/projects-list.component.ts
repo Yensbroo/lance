@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Project } from "../../../core/models/project";
-
+import { IProject } from "../../../core/models/project";
 
 @Component({
   selector: "app-projects-list",
@@ -8,14 +7,13 @@ import { Project } from "../../../core/models/project";
   styleUrls: ["./projects-list.component.scss"]
 })
 export class ProjectsListComponent {
-
-
-
   @Input()
-  projects: Project[];
+  projects: IProject;
 
-  @Output() sortByName = new EventEmitter<Project>();
-  @Output() sortByBudget = new EventEmitter<Project>();
+  @Output()
+  sortByName = new EventEmitter<IProject>();
+  @Output()
+  sortByBudget = new EventEmitter<IProject>();
 
   sortByProjectName() {
     this.sortByName.emit();
