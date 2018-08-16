@@ -69,7 +69,6 @@ export class ProjectPageComponent implements OnInit {
     const end = moment(new Date(t));
     const now = moment(new Date());
     const distance = t - today;
-    console.log(distance);
     const years = end.diff(now, "year");
     now.add(years, "years");
 
