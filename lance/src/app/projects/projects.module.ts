@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { MomentModule } from "ngx-moment";
 import { SortPipe } from "./sort.pipe";
 import { CreateProjectPageComponent } from "./pages/create-project-page/create-project-page.component";
+import { ProjectNavigationComponent } from './components/project-navigation/project-navigation.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { CreateProjectPageComponent } from "./pages/create-project-page/create-p
     ProjectFilterComponent,
     FilterPipe,
     SortPipe,
-    CreateProjectPageComponent
+    CreateProjectPageComponent,
+    ProjectNavigationComponent
   ],
   exports: [ProjectsListComponent]
 })
