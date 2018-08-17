@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
-import { timer, Subject, Observable } from "rxjs";
-import { takeWhile, map } from "rxjs/operators";
+import { timer, Subject, Observable, ReplaySubject, Subscription } from "rxjs";
+import { takeWhile, map, takeUntil } from "rxjs/operators";
 
 @Injectable()
 export class CountdownService {
   private _countdown = new Subject<number>();
+  private destroyed$ = new Subject<boolean>();
+  private sub: Subscription;
 
   countdown(): Observable<number> {
     return this._countdown.asObservable();
@@ -16,7 +18,7 @@ export class CountdownService {
     // Ensure that only one timer is in progress at any given time.
     if (!this.isCounting) {
       this.isCounting = true;
-      timer(0, 1000)
+      this.sub = timer(0, 1000)
         .pipe(
           takeWhile(t => t < count),
           map(t => count - t)
@@ -29,5 +31,12 @@ export class CountdownService {
           this._countdown = new Subject<number>();
         });
     }
+  }
+
+  stop() {
+    this.sub.unsubscribe();
+    this._countdown.complete();
+    this.isCounting = false;
+    console.log(this.isCounting);
   }
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProjectService } from "../../../core/services/project.service";
 import { ActivatedRoute } from "@angular/router";
 import { IProject } from "../../../core/models/project";
 import { Store, select } from "@ngrx/store";
 import { AppState } from "../../../store/app.state";
-import { Observable, timer } from "rxjs";
+import { Observable, timer, Subscription } from "rxjs";
 import { take, map } from "rxjs/operators";
 import * as moment from "moment";
 import "moment/locale/nl-be";
@@ -20,7 +20,7 @@ import { CountdownService } from "../../../core/services/countDown.service";
   templateUrl: "./project-page.component.html",
   styleUrls: ["./project-page.component.scss"]
 })
-export class ProjectPageComponent implements OnInit {
+export class ProjectPageComponent implements OnInit, OnDestroy {
   project: IProject;
   error: String;
   getProject: Observable<any>;
@@ -28,7 +28,7 @@ export class ProjectPageComponent implements OnInit {
   isAuthenticated: boolean;
   user: User[];
   countdownTime;
-  count;
+  sub: Subscription;
   projectEnd: number;
 
   constructor(
@@ -45,7 +45,12 @@ export class ProjectPageComponent implements OnInit {
     this.setUser();
     this.loadProject();
     this.setProject();
-    this.startCountdown();
+    console.log("initialized");
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+    this.countdownService.stop();
   }
 
   setUser() {
@@ -76,7 +81,7 @@ export class ProjectPageComponent implements OnInit {
     now.add(months, "months");
 
     const weeks = end.diff(now, "weeks");
-    now.add(weeks, "days");
+    now.add(weeks, "weeks");
 
     const days = end.diff(now, "days");
     now.add(days, "days");
@@ -155,27 +160,20 @@ export class ProjectPageComponent implements OnInit {
   }
 
   setProject() {
-    return new Promise((resolve, reject) => {
-      this.getProject.subscribe(
-        project => {
-          this.project = project.project;
-          this.projectEnd = new Date(this.project.project_end).getTime();
-          this.countdownService.countdown().subscribe(
-            t => {
-              this.countdownTime = this.format(t);
-            },
-            null,
-            () => (this.countdownTime = "Dit project is afgelopen")
-          );
-          this.countdownService.start(this.projectEnd);
-        },
-        err => console.log(err)
-      );
-      resolve();
-    });
-  }
-
-  startCountdown() {
-    this.getProject.subscribe(data => {});
+    this.sub = this.getProject.subscribe(
+      project => {
+        this.project = project.project;
+        this.projectEnd = new Date(this.project.project_end).getTime();
+        this.countdownService.countdown().subscribe(
+          t => {
+            this.countdownTime = this.format(t);
+          },
+          null,
+          () => (this.countdownTime = "Dit project is afgelopen")
+        );
+        this.countdownService.start(this.projectEnd);
+      },
+      err => console.log(err)
+    );
   }
 }
