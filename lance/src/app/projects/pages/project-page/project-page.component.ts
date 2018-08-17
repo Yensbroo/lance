@@ -4,7 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { IProject } from "../../../core/models/project";
 import { Store, select } from "@ngrx/store";
 import { AppState } from "../../../store/app.state";
-import { Observable, timer, Subscription } from "rxjs";
+import { Observable, timer, Subscription, interval } from "rxjs";
 import { take, map } from "rxjs/operators";
 import * as moment from "moment";
 import "moment/locale/nl-be";
@@ -27,8 +27,9 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   getUser: Observable<any>;
   isAuthenticated: boolean;
   user: User[];
-  countdownTime;
-  sub: Subscription;
+  countdownTime: String;
+  counter$: Observable<number>;
+  subTimer: Subscription;
   projectEnd: number;
 
   constructor(
@@ -49,8 +50,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
-    this.countdownService.stop();
+    this.subTimer.unsubscribe();
   }
 
   setUser() {
@@ -69,109 +69,38 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  format(t) {
-    const today = new Date().getTime();
-    const end = moment(new Date(t));
-    const now = moment(new Date());
-    const distance = t - today;
-    const years = end.diff(now, "year");
-    now.add(years, "years");
+  dhms(t) {
+    var years, months, days, hours, minutes, seconds;
+    days = Math.floor(t / 86400);
+    t -= days * 86400;
+    hours = Math.floor(t / 3600) % 24;
+    t -= hours * 3600;
+    minutes = Math.floor(t / 60) % 60;
+    t -= minutes * 60;
+    seconds = t % 60;
 
-    const months = end.diff(now, "months");
-    now.add(months, "months");
-
-    const weeks = end.diff(now, "weeks");
-    now.add(weeks, "weeks");
-
-    const days = end.diff(now, "days");
-    now.add(days, "days");
-
-    const hours = end.diff(now, "hours");
-    now.add(hours, "hours");
-
-    const minutes = end.diff(now, "minutes");
-    now.add(minutes, "minutes");
-
-    const seconds = end.diff(now, "seconds");
-    now.add(seconds, "seconds");
-    if (distance >= 31557600000) {
-      return [
-        years +
-          " jaar " +
-          months +
-          " maanden " +
-          weeks +
-          " weken " +
-          days +
-          " dagen " +
-          hours +
-          " uur " +
-          minutes +
-          " minuten " +
-          seconds +
-          " seconden"
-      ];
-    } else if (distance >= 2629800000 && distance < 31557600000) {
-      return [
-        months +
-          " maanden " +
-          weeks +
-          " weken " +
-          days +
-          " dagen " +
-          hours +
-          " uur " +
-          minutes +
-          " minuten " +
-          seconds +
-          " seconden"
-      ];
-    } else if (distance <= 2629800000 && distance > 604800017) {
-      return [
-        weeks +
-          " weken " +
-          days +
-          " dagen " +
-          hours +
-          " uur " +
-          minutes +
-          " minuten " +
-          seconds +
-          " seconden"
-      ];
-    } else if (distance >= 86400000 && distance < 604800017) {
-      return [
-        days +
-          " dagen " +
-          hours +
-          " uur " +
-          minutes +
-          " minuten " +
-          seconds +
-          " seconden"
-      ];
-    } else if (distance >= 3600000 && distance < 86400000) {
-      return [hours + " uur " + minutes + " minuten " + seconds + " seconden"];
-    } else if (distance >= 60000 && distance < 3600000) {
-      return [minutes + " minuten " + seconds + " seconden"];
-    } else if (distance >= 1000 && distance < 60000) {
-      return [seconds + " seconden"];
-    }
+    return [
+      days + " dagen ",
+      hours + " uur ",
+      minutes + " minuten ",
+      seconds + " seconden "
+    ].join(" ");
   }
 
   setProject() {
-    this.sub = this.getProject.subscribe(
+    this.getProject.subscribe(
       project => {
         this.project = project.project;
         this.projectEnd = new Date(this.project.project_end).getTime();
-        this.countdownService.countdown().subscribe(
-          t => {
-            this.countdownTime = this.format(t);
-          },
-          null,
-          () => (this.countdownTime = "Dit project is afgelopen")
+        this.counter$ = interval(1000).pipe(
+          map(x => {
+            return Math.floor((this.projectEnd - new Date().getTime()) / 1000);
+          })
         );
-        this.countdownService.start(this.projectEnd);
+        this.subTimer = this.counter$.subscribe(x => {
+          this.countdownTime = this.dhms(x);
+          console.log(x);
+        });
       },
       err => console.log(err)
     );

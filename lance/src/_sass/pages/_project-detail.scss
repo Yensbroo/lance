@@ -3,26 +3,27 @@ app-project-detail {
     margin-bottom: 20px;
   }
   .lnc-project__container,
-  .lnc-project__end, 
+  .lnc-project__end,
   .lnc-project__bid-input {
     background: white;
   }
-
-  .lnc-project__end, .lnc-project__bid-input {
+  .lnc-project__end,
+  .lnc-project__bid-input {
     margin-bottom: 20px;
     height: 80px;
-
   }
-
   .lnc-project__end {
     padding-top: 15px;
-    p, h2 {
+    p,
+    h4 {
       text-align: center;
     }
+    h4 {
+      padding-top: 5px;
+    }
   }
-
   .lnc-project__bid-input {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
@@ -40,7 +41,6 @@ app-project-detail {
       font-size: 16px;
     }
   }
-
   .lnc-project__container {
     padding: 20px;
   }

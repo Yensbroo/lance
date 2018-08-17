@@ -17,7 +17,7 @@ export class ProjectDetailComponent implements OnInit {
   @Input()
   user: User[];
   @Input()
-  countdownTime: String;
+  countdownTime: String[];
 
   ngOnInit() {}
 }
