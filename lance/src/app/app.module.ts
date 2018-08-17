@@ -36,7 +36,6 @@ import { CategoriesComponent } from "./home/categories/categories.component";
 import { environment } from "../environments/environment.prod";
 import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./core/services/project.service";
-import { CountdownService } from "./core/services/countDown.service";
 
 @NgModule({
   declarations: [
@@ -62,7 +61,7 @@ import { CountdownService } from "./core/services/countDown.service";
     }),
     EffectsModule.forRoot([AuthEffects, ProjectEffects])
   ],
-  providers: [AuthenticationService, ProjectService, CountdownService],
+  providers: [AuthenticationService, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

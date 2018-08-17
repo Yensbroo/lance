@@ -130,4 +130,21 @@
       }
     }
   }
+  @media(max-width: 567px) {
+    .lnc-projects__list {
+      .projects {
+        .project_item {
+          display: flex;
+          flex-direction: column;
+          .project_info {
+            padding-right: 0;
+          }
+          .project_end,
+          .project_stats {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }

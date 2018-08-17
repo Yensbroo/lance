@@ -1,34 +1,56 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <h1>{{project?.title}}</h1>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-lg-4 justify-content-center">
-      <div class="lnc-project__end lnc-container__shadow">
+<div class="project-header">
+  <h1 class="title">{{project?.title}}</h1>
+  <h2>{{project?.user?.full_name}}</h2>
+</div>
+<div class="container lnc-container__shadow">
+  <div class="project_info lnc-container__shadow">
+    <div class="stats">
+      <div class="bid_count">
+        <p>Biedingen:</p>
+        <h2>{{project?.bids?.length}}</h2>
+      </div>
+      <div class="budget">
+        <p>Budget:</p>
+        <h2>€ {{project?.budget}}</h2>
+      </div>
+      <div class="countdown">
         <p>Dit project eindigt binnen:</p>
-        <h4>{{countdownTime}}</h4>
+        <h3>{{countdownTime}}</h3>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="lnc-project__bid-input lnc-container__shadow">
-        <div class="bid__input" *ngIf="isAuthenticated">
-          <label for="bid">Hoeveel zou je vragen voor dit project?</label>
+    <hr>
+    <div class="description">
+      <h3>Beschrijving</h3>
+      <p>{{project?.body}}</p>
+    </div>
+    <hr>
+    <div class="bid_actions">
+      <div class="bid_text">
+        <h2>Is dit de geschikte opdracht?</h2>
+        <p>Aarzel dan niet om te bieden!</p>
+      </div>
+      <div class="bid_input">
+        <div class="field">
+          <div class="input-icon">
+            <p>€</p>
+          </div>
           <input type="text">
-          <button>Bieden</button>
         </div>
-        <div class="bid__login" *ngIf="!isAuthenticated">
-          <p>
-            <a href="">Meld je aan</a> om te kunnen bieden</p>
-        </div>
+        <button>Bieden</button>
       </div>
     </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="lnc-project__container lnc-container__shadow">
-        <h4>Beschrijving</h4>
-        <p>{{project?.body}}</p>
+    <div class="bids">
+      <h3>Biedingen:</h3>
+      <div class="bid" *ngFor="let bid of project.bids">
+        <div class="user">
+          <img src="../../../../assets/images/avatar-placeholder.png" alt="">
+          <a>{{bid.user.full_name}}</a>
+          <p>{{bid.created_at | amDateFormat: 'LL'}}</p>
+        </div>
+        <h2>€{{bid.price}}</h2>
+        <hr>
       </div>
+
     </div>
   </div>
 </div>

@@ -13,7 +13,6 @@ import * as fromProjectReducer from "../../../store/reducers/project.reducers";
 import * as fromAuthReducer from "../../../store/reducers/auth.reducers";
 import { ProjectActionTypes } from "../../../store/actions/project.actions";
 import { User } from "../../../core/models/user";
-import { CountdownService } from "../../../core/services/countDown.service";
 
 @Component({
   selector: "app-project-page",
@@ -35,8 +34,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private store: Store<AppState>,
-    private countdownService: CountdownService
+    private store: Store<AppState>
   ) {
     this.getProject = store.select(fromProjectReducer.getProjects);
     this.getUser = store.select(fromAuthReducer.getAuth);
@@ -46,7 +44,6 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     this.setUser();
     this.loadProject();
     this.setProject();
-    console.log("initialized");
   }
 
   ngOnDestroy() {
@@ -70,7 +67,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   }
 
   dhms(t) {
-    var years, months, days, hours, minutes, seconds;
+    var days, hours, minutes, seconds;
     days = Math.floor(t / 86400);
     t -= days * 86400;
     hours = Math.floor(t / 3600) % 24;
@@ -99,7 +96,6 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
         );
         this.subTimer = this.counter$.subscribe(x => {
           this.countdownTime = this.dhms(x);
-          console.log(x);
         });
       },
       err => console.log(err)
