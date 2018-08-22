@@ -38,7 +38,7 @@ exports.edit_profile = (req, res) => {
   }).then((profile) => {
     if (!profile) {
       res.status(404).json({
-        notfound: 'No profile found'
+        notfound: 'Er is geen profiel gevonden van deze gebruiker'
       });
     }
     profile.update({
@@ -47,7 +47,7 @@ exports.edit_profile = (req, res) => {
       updated_at: Date.now()
     }).then(() => {
       res.json({
-        success: 'Profile has been updated'
+        success: 'Het profiel is geupdatet'
       })
     })
   })

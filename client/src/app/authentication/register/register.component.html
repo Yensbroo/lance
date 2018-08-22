@@ -7,25 +7,25 @@
         <div class="form-group">
           <input type="text" [(ngModel)]="user.full_name" name="full_name" required>
           <label for="full_name" class="floating-label">Naam</label>
-          <!-- <p *ngIf="message.full_name !== ''" class="lnc-error">{{message.full_name}}</p> -->
+          <p *ngIf="error?.full_name !== ''" class="lnc-error">{{error?.full_name}}</p>
 
         </div>
         <div class="form-group">
           <input type="email" [(ngModel)]="user.email" name="email" required>
           <label for="email" class="floating-label">Email</label>
-          <!--  <p *ngIf="message.email !== ''" class="lnc-error">{{message.email}}</p>
-          <p *ngIf="message.noUser !== ''" class="lnc-error">{{message.noUser}}</p> -->
+          <p *ngIf="error?.email !== ''" class="lnc-error">{{error?.email}}</p>
+          <p *ngIf="error?.noUser !== ''" class="lnc-error">{{error?.noUser}}</p>
         </div>
         <div class="form-group">
           <input type="password" [(ngModel)]="user.password" name="password" required>
           <label for="password" class="floating-label">Wachtwoord</label>
-          <!--  <p *ngIf="message.password !== ''" class="lnc-error">{{message.password}}</p>
-          <p *ngIf="message.wrongpassword !== ''" class="lnc-error">{{message.wrongpassword}}</p> -->
+          <p *ngIf="error?.password !== ''" class="lnc-error">{{error?.password}}</p>
+          <p *ngIf="error?.wrongpassword !== ''" class="lnc-error">{{error?.wrongpassword}}</p>
         </div>
         <div class="form-group">
           <input type="password" [(ngModel)]="user.password2" name="password2" required>
           <label for="password2" class="floating-label">Herhaal wachtwoord</label>
-          <!-- <p *ngIf="message.password2 !== ''" class="lnc-error">{{message.password2}}</p> -->
+          <p *ngIf="error?.password2 !== ''" class="lnc-error">{{error?.password2}}</p>
         </div>
         <button type="submit">Registreer</button>
         <span>Wachtwoord vergeten? Klik hier</span>

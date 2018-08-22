@@ -16,46 +16,46 @@ module.exports = function validateProjectInput(data) {
       min: 10,
       max: 100
     })) {
-    errors.title = "Your title must be between 10 and 100 characters";
+    errors.title = "Je titel moet tussen de 10 en 100 karakters bevatten";
   }
 
   if (Validator.isEmpty(data.title)) {
-    errors.title = "A title is required";
+    errors.title = "Een titel is verplicht";
   }
 
   if (Validator.isEmpty(data.category_id)) {
-    errors.category_id = "A category is required";
+    errors.category_id = "Een categorie is verplicht";
   }
 
   if (!Validator.isLength(data.body, {
       min: 50,
       max: 1000
     })) {
-    errors.body = "Your description must be between 50 and 1000 characters";
+    errors.body = "Je beschrijving moet tussen de 50 en 1000 karakters bevatten";
   }
 
   if (Validator.isEmpty(data.body)) {
-    errors.body = "A description is required";
+    errors.body = "Een beschrijving is verplicht";
   }
 
   if (!Validator.isInt(data.budget)) {
-    errors.budget = "Your budget must be a number"
+    errors.budget = "Je budget moet een getal zijn"
   }
 
   if (Validator.isEmpty(data.budget)) {
-    errors.budget = "A budget is required"
+    errors.budget = "Een budget is verplicht"
   }
 
   if (Validator.isEmpty(data.project_start)) {
-    errors.project_start = "A start date is required";
+    errors.project_start = "Een start datum is verplicht";
   }
 
   if (!Validator.isAfter(data.project_end, data.project_start)) {
-    errors.project_end = "Your end date must be after your start date"
+    errors.project_end = "Je eind datum mag niet voor je start datum zijn"
   }
 
   if (Validator.isEmpty(data.project_end)) {
-    errors.project_end = "An end date is required";
+    errors.project_end = "Een eind datum is verplicht";
   }
 
   return {

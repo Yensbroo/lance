@@ -47,7 +47,7 @@ exports.create_user = (req, res) => {
     .then((user) => {
       if (user) {
         return res.status(400).json({
-          email: 'Deze email is reeds in gebruik'
+          email: 'Dit emailadres is reeds in gebruik'
         })
       }
 

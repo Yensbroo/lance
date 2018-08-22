@@ -44,7 +44,7 @@ exports.create_bid = (req, res) => {
     const today = moment().format('MM-DD-YYYY');
     if (project.project_end <= today) {
       res.status(400).json({
-        denied: 'You can not bid on this project anymore'
+        denied: 'Je kan niet meer op dit project bieden'
       });
     } else {
       Bid.create({
@@ -68,7 +68,7 @@ exports.delete_bid = (req, res) => {
     }).then((bid) => {
       if (!bid) {
         res.status(404).json({
-          nobids: 'This user has no bids'
+          nobids: 'Deze gebruiker heeft geen biedingen'
         });
       }
       bid.destroy().then(() => {

@@ -45,7 +45,7 @@ exports.get_projects = (req, res) => {
     }).then((projects) => {
       if (!projects) {
         res.status(404).json({
-          noprojects: 'There are currently no projects'
+          noprojects: 'Er zijn momenteel geen projecten'
         });
       }
       res.send(projects);
@@ -82,7 +82,7 @@ exports.get_project_by_id = (req, res) => {
     }).then(project => {
       if (!project) {
         res.status(404).json({
-          noproject: 'This project does not exist'
+          noproject: 'Dit project bestaat niet'
         });
       }
       res.send(project);
@@ -99,7 +99,7 @@ exports.get_projects_by_user = (req, res) => {
     }).then(projects => {
       if (!projects) {
         res.status(404).json({
-          noprojects: 'This user has no projects'
+          noprojects: 'Deze gebruiker heeft geen projecten'
         });
       }
       res.send(projects)
@@ -185,13 +185,13 @@ exports.update_project = (req, res) => {
     }
     if (!project) {
       res.status(404).json({
-        notfound: 'No project found'
+        notfound: 'Er is geen project gevonden'
       });
     }
 
     if (project.user_id !== req.user.id) {
       res.status(400).json({
-        baduser: 'This is not your project'
+        baduser: 'Dit is niet jouw project'
       });
     }
 
@@ -199,7 +199,7 @@ exports.update_project = (req, res) => {
 
     if (project.project_start <= today) {
       res.status(400).json({
-        denied: 'You cannot update this project anymore'
+        denied: 'Je kan dit project niet meer updaten'
       });
     } else {
       project.update(projectFields).then((project) => {
@@ -218,7 +218,7 @@ exports.delete_project = (req, res) => {
     }).then((project) => {
       if (!project) {
         res.status(404).json({
-          noproject: 'This project does not exist'
+          noproject: 'Dit project bestaat niet'
         });
       }
       project.destroy().then(() => {
@@ -240,7 +240,7 @@ exports.publish_unpublish_project = (req, res) => {
   }).then((project) => {
     if (!project) {
       res.status(404).json({
-        noproject: 'This project does not exist'
+        noproject: 'Dit project bestaat niet'
       });
     }
 
@@ -249,7 +249,7 @@ exports.publish_unpublish_project = (req, res) => {
     if (project.published) {
       if (project.project_start <= today) {
         res.status(400).json({
-          nounpublish: "This project can't be unpublished anymore"
+          nounpublish: "Dit project kan niet meer ongepubliceerd worden"
         })
       } else {
         project.update({
@@ -257,7 +257,7 @@ exports.publish_unpublish_project = (req, res) => {
           deleted_at: Date.now()
         }).then(() => {
           res.json({
-            success: 'Project has been unpublished'
+            success: 'Het project is ongepubliceerd'
           })
         })
       }
@@ -269,7 +269,7 @@ exports.publish_unpublish_project = (req, res) => {
         published_at: Date.now()
       }).then(() => {
         res.json({
-          success: 'Project has been published'
+          success: 'Het project is gepubliceerd'
         })
       })
     }

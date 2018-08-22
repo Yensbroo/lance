@@ -13,37 +13,37 @@ module.exports = function validateRegisterInput(data) {
       min: 4,
       max: 30
     })) {
-    errors.full_name = "Your name must be between 4 and 30 characters";
+    errors.full_name = "Je naam moet tussen de 4 en 30 karakters bevatten";
   }
 
   if (Validator.isEmpty(data.full_name)) {
-    errors.full_name = "A name is required";
+    errors.full_name = "Een naam is verplicht";
   }
 
   if (Validator.isEmpty(data.email)) {
-    errors.email = "Email is required";
+    errors.email = "Een emailadres is verplicht";
   } else if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = 'Dit is geen geldig emailadres';
   }
 
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password is required";
+    errors.password = "Een wachtwoord is verplicht";
   }
 
   if (!Validator.isLength(data.password, {
       min: 6,
       max: 30
     })) {
-    errors.password = "Password must be between 6 and 30 characters";
+    errors.password = "Je wachtwoord moet tussen de 6 en 30 karakters bevatten";
   }
 
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "You have to confirm your password";
+    errors.password2 = "Je moet je wachtwoord bevestigen";
   }
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = "Passwords must match"
+    errors.password2 = "De wachtwoorden komen niet overeen"
   }
 
 

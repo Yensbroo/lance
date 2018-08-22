@@ -39,7 +39,7 @@ exports.delete_review = (req, res) => {
   }).then((review) => {
     if (!review) {
       res.status(404).json({
-        notfound: 'Review not found'
+        notfound: 'De review is niet gevonden'
       });
     }
 
