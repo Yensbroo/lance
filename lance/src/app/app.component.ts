@@ -7,6 +7,7 @@ import { AuthActionTypes } from "./store/actions/auth.actions";
 import * as fromReducer from "./store/reducers/auth.reducers";
 import { User } from "./core/models/user";
 import { map } from "../../node_modules/rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -20,13 +21,13 @@ export class AppComponent {
   isAuthenticated: false;
   user: Observable<any>;
 
-  constructor(private store: Store<AppState>) {
-    this.getState = this.store.select(fromReducer.getAuth);
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.getState = this.store.pipe(select(fromReducer.getAuth));
   }
 
   ngOnInit() {
     this.isOpen = false;
-    if (localStorage.token) {
+    if (localStorage.getItem("token")) {
       this.setUser().then(() => {
         this.getState.subscribe(user => {
           this.user = user.user;

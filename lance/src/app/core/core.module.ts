@@ -7,10 +7,18 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { JwtModule } from "@auth0/angular-jwt";
+import { MomentModule } from "ngx-moment";
 
 @NgModule({
-  imports: [CommonModule, MaterialModule, FormsModule, RouterModule, JwtModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    RouterModule,
+    JwtModule,
+    MomentModule
+  ],
   declarations: [HeaderComponent, SidebarComponent, FooterComponent],
   exports: [HeaderComponent, SidebarComponent]
 })
-export class CoreModule { }
+export class CoreModule {}

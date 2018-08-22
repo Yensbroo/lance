@@ -1,11 +1,11 @@
-import { Category } from './category';
+import { Category } from "./category";
 
-export class Project {
+export interface IProject {
   id: String;
   user_id: Number;
   category: Category[];
   project_start: String;
-  project_end: String;
+  project_end: number;
   budget: Number;
   title: String;
   body: String;

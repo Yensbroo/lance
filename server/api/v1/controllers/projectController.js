@@ -58,24 +58,27 @@ exports.get_project_by_id = (req, res) => {
       where: {
         id: req.params.id
       },
-      include: {
-        model: User,
-        attributes: {
-          exclude: ['updated_at', 'password', 'email', 'confirmation_token', 'email_confirmed', 'created_at', 'deleted_at', 'remember_token', 'role_id', 'deleted_at']
-        }
-      },
-      include: {
-        model: Bid,
-        attributes: {
-          exclude: ['updated_at', 'project_id', 'user_id']
-        },
-        include: {
+      include: [{
           model: User,
           attributes: {
             exclude: ['updated_at', 'password', 'email', 'confirmation_token', 'email_confirmed', 'created_at', 'remember_token', 'role_id', 'deleted_at']
           }
+        }, {
+          model: Bid,
+          attributes: {
+            exclude: ['updated_at', 'project_id', 'user_id']
+          },
+          include: {
+            model: User,
+            attributes: {
+              exclude: ['updated_at', 'password', 'email', 'confirmation_token', 'email_confirmed', 'created_at', 'remember_token', 'role_id', 'deleted_at']
+            }
+          }
+        },
+        {
+          model: Category,
         }
-      }
+      ]
     }).then(project => {
       if (!project) {
         res.status(404).json({

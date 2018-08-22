@@ -1,25 +1,24 @@
-import { Project } from '../core/models/project';
-import { User } from '../core/models/user';
-import * as fromAuthReducer from '../store/reducers/auth.reducers';
-import * as fromProjectReducer from '../store/reducers/project.reducers';
-import * as fromErrorReducer from '../store/reducers/error.reducers'
-
+import { IProject } from "../core/models/project";
+import { User } from "../core/models/user";
+import * as fromAuthReducer from "../store/reducers/auth.reducers";
+import * as fromProjectReducer from "../store/reducers/project.reducers";
+import * as fromErrorReducer from "../store/reducers/error.reducers";
 
 export interface AppState {
-  authState: AuthState
+  authState: AuthState;
   projectState: ProjectState;
   error: ErrorState;
 }
 
 export interface ProjectState {
-  projects: Project[];
-  project: Project[];
+  projects: IProject[];
+  project: IProject[];
 }
 
 export interface AuthState {
-  user: User[],
-  isAuthenticated: boolean,
-  errorMessage: String
+  user: User[];
+  isAuthenticated: boolean;
+  errorMessage: String;
 }
 
 export interface ErrorState {

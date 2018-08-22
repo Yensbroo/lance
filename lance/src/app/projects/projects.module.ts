@@ -11,8 +11,10 @@ import { ProjectFilterComponent } from "./components/project-filter/project-filt
 import { RouterModule } from "@angular/router";
 import { FilterPipe } from "./filter.pipe";
 import { FormsModule } from "@angular/forms";
-import { SortPipe } from './sort.pipe';
-import { CreateProjectPageComponent } from './pages/create-project-page/create-project-page.component';
+import { MomentModule } from "ngx-moment";
+import { SortPipe } from "./sort.pipe";
+import { ProjectFormComponent } from "./components/project-form/project-form.component";
+import { CreateProjectPageComponent } from "./pages/create-project-page/create-project-page.component";
 
 @NgModule({
   imports: [
@@ -20,17 +22,20 @@ import { CreateProjectPageComponent } from './pages/create-project-page/create-p
     CoreModule,
     HttpClientModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MomentModule,
+    AppRoutingModule
   ],
   declarations: [
     ProjectsListComponent,
     ProjectPageComponent,
     ProjectsPageComponent,
     ProjectDetailComponent,
+    CreateProjectPageComponent,
     ProjectFilterComponent,
     FilterPipe,
     SortPipe,
-    CreateProjectPageComponent
+    ProjectFormComponent
   ],
   exports: [ProjectsListComponent]
 })
