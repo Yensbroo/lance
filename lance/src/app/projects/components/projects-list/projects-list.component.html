@@ -1,17 +1,17 @@
 <h2>Opdrachten</h2>
-<div class="projects_sort">
+<div class="projects_sort lnc-shadow">
   <input [(ngModel)]="searchText" type="text" class="searchBox">
 </div>
 
 <div *ngIf="projects" class="projects">
-  <div class="sortTable">
+  <div class="sortTable lnc-shadow">
     <p id="title" (click)="sortByProjectName()">Titel</p>
     <p id="end">Eindigt op</p>
     <p id="budget" (click)="sortByProjectBudget()">Budget
       <i class="fas fa-long-arrow-alt-up"></i>
     </p>
   </div>
-  <div [routerLink]="[ '/opdracht', project.id]" class="project_item" *ngFor="let project of projects | searchProjects: searchText">
+  <div [routerLink]="[ '/opdracht', project.id]" class="project_item lnc-shadow" *ngFor="let project of projects | searchProjects: searchText">
     <div class="project_info">
       <a [routerLink]="[ '/opdracht', project.id]">{{project.title}}</a>
       <p>{{project.body}}</p>
