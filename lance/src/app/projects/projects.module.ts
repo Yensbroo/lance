@@ -13,6 +13,7 @@ import { FilterPipe } from "./filter.pipe";
 import { FormsModule } from "@angular/forms";
 import { MomentModule } from "ngx-moment";
 import { SortPipe } from "./sort.pipe";
+import { ProjectFormComponent } from "./components/project-form/project-form.component";
 import { CreateProjectPageComponent } from "./pages/create-project-page/create-project-page.component";
 
 @NgModule({
@@ -30,10 +31,11 @@ import { CreateProjectPageComponent } from "./pages/create-project-page/create-p
     ProjectPageComponent,
     ProjectsPageComponent,
     ProjectDetailComponent,
+    CreateProjectPageComponent,
     ProjectFilterComponent,
     FilterPipe,
     SortPipe,
-    CreateProjectPageComponent
+    ProjectFormComponent
   ],
   exports: [ProjectsListComponent]
 })

@@ -15,8 +15,8 @@ import { CreateProjectPageComponent } from "./projects/pages/create-project-page
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "opdrachten", component: ProjectsPageComponent },
+  { path: "maakopdracht", component: CreateProjectPageComponent },
   { path: "opdracht/:id", component: ProjectPageComponent },
-  { path: "opdracht/create", component: CreateProjectPageComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "registered", component: RegisteredComponent }
@@ -27,4 +27,4 @@ const routes: Routes = [
   declarations: [],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
