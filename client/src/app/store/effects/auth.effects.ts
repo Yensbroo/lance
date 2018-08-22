@@ -9,15 +9,14 @@ import {
   AuthActionTypes,
   Login,
   LoginSuccess,
-  LoginFailure,
   Register,
   RegisterSuccess,
-  RegisterFailure,
   CurrentUser,
   Logout
 } from "../actions/auth.actions";
 
 import { AuthenticationService } from "../../core/services/authentication.service";
+import { GetErrors } from "../actions/error.actions";
 @Injectable()
 export class AuthEffects {
   @Effect()
@@ -33,7 +32,7 @@ export class AuthEffects {
             email: payload.email
           });
         }),
-        catchError(error => of(new LoginFailure({ error: error })))
+        catchError(error => of(new GetErrors({ error })))
       )
     )
   );
@@ -49,7 +48,7 @@ export class AuthEffects {
 
   @Effect()
   Register: Observable<any> = this.actions$.pipe(
-    ofType(AuthActionTypes.REGISTER),
+    ofType<Register>(AuthActionTypes.REGISTER),
     map((action: Register) => action.payload),
     mergeMap(payload =>
       this.authService.register(payload).pipe(
@@ -59,14 +58,14 @@ export class AuthEffects {
             this.router.navigateByUrl("/registered")
           );
         }),
-        catchError(error => of(new RegisterFailure({ error: error })))
+        catchError(error => of(new GetErrors({ error })))
       )
     )
   );
 
   @Effect({ dispatch: false })
   Logout: Observable<any> = this.actions$.pipe(
-    ofType(AuthActionTypes.LOGOUT),
+    ofType<Logout>(AuthActionTypes.LOGOUT),
     tap(() => {
       localStorage.removeItem("token");
     })

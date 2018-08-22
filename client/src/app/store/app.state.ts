@@ -1,13 +1,11 @@
 import { IProject } from "../core/models/project";
 import { User } from "../core/models/user";
-import * as fromAuthReducer from "../store/reducers/auth.reducers";
-import * as fromProjectReducer from "../store/reducers/project.reducers";
-import * as fromErrorReducer from "../store/reducers/error.reducers";
+import { Error } from "../core/models/error";
 
 export interface AppState {
   authState: AuthState;
   projectState: ProjectState;
-  error: ErrorState;
+  errorState: ErrorState;
 }
 
 export interface ProjectState {
@@ -22,5 +20,5 @@ export interface AuthState {
 }
 
 export interface ErrorState {
-  message: String;
+  message: Error[];
 }

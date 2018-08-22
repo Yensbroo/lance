@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../core/services/authentication.service";
 import { Router } from "@angular/router";
-import { Store, select } from '@ngrx/store';
-import { User } from '../../core/models/user';
-import { AppState } from '../../store/app.state';
-import { Login } from '../../store/actions/auth.actions'
+import { Store, select } from "@ngrx/store";
+import { User } from "../../core/models/user";
+import { AppState, ErrorState } from "../../store/app.state";
+import { Login } from "../../store/actions/auth.actions";
 import { Observable } from "../../../../node_modules/rxjs";
+import * as fromReducer from "../../store/reducers/error.reducers";
+import { Actions } from "@ngrx/effects";
 
 @Component({
   selector: "app-login",
@@ -14,13 +16,18 @@ import { Observable } from "../../../../node_modules/rxjs";
 })
 export class LoginComponent implements OnInit {
   user: User = new User();
-  getState: Observable<any>
+  getErrors: Observable<any>;
+  error: Observable<any>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<ErrorState>, private actions$: Actions) {
+    this.getErrors = store.select(fromReducer.getErrors);
+    this.getErrors.subscribe(err => {
+      console.log(err.message);
+      this.error = err.message;
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit(): void {
     const payload = {

@@ -19,10 +19,9 @@ export function reducer(state = initialState, action: All): AuthState {
         errorMessage: null
       };
     }
-    case AuthActionTypes.LOGIN_FAILURE: {
+    case AuthActionTypes.REGISTER_SUCCESS: {
       return {
-        ...state,
-        errorMessage: "test"
+        ...state
       };
     }
     case AuthActionTypes.CURRENT_USER: {

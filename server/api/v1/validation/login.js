@@ -8,13 +8,13 @@ module.exports = function validateLoginInput(data) {
   data.password = !isEmpty(data.password) ? data.password : "";
 
   if (Validator.isEmpty(data.email)) {
-    errors.email = "Email is required";
+    errors.email = "Email is vereist";
   } else if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = 'Dit is geen geldig emailadres';
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password is required";
+    errors.password = "Wachtwoord is vereist";
   }
 
   return {

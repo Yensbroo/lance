@@ -6,7 +6,7 @@
   "scripts": {
     "start": "echo 'Server started in production mode.' & SET NODE_ENV=production & node server.js",
     "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & DEBUG=lance:* nodemon --config nodemon.json ./bin/www",
-    "client": "cd lance && ng serve",
+    "client": "cd client && ng serve",
     "dev": "concurrently \"yarn start-dev \" \"yarn client\""
   },
   "author": "",

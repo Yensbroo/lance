@@ -40,14 +40,14 @@ exports.create_user = (req, res) => {
 
 
   User.find({
-    where: {
-      email: req.body.email
-    }
-  })
+      where: {
+        email: req.body.email
+      }
+    })
     .then((user) => {
       if (user) {
         return res.status(400).json({
-          email: 'This email already exists'
+          email: 'Deze email is reeds in gebruik'
         })
       }
 
@@ -56,24 +56,24 @@ exports.create_user = (req, res) => {
 
 
       User.create({
-        full_name: req.body.full_name,
-        email: req.body.email,
-        password: req.body.password,
-        role_id: 2,
-        email_confirmed: false,
-        confirmation_token: email_token
-      }).then((user) => {
-        //email settings
-        const subject = `${user.full_name}, please verify your email!`;
-        const text = 'Please verify your email';
-        const email_body = `<h2>Verify your email</h2><br/>
-      <a href="http://localhost:8000/verify/${user.confirmation_token}">Click this link to verify your email</a>`;
+          full_name: req.body.full_name,
+          email: req.body.email,
+          password: req.body.password,
+          role_id: 2,
+          email_confirmed: false,
+          confirmation_token: email_token
+        }).then((user) => {
+          //email settings
+          const subject = `${user.full_name}, Verifieer je account!`;
+          const text = 'Verifieer je account';
+          const email_body = `<h2>Verifieer je account</h2><br/>
+      <a href="http://localhost:8000/verify/${user.confirmation_token}">Klik deze link om je account te verifiëren</a>`;
 
-        //send email with verification token to user
-        send(user.email, subject, text, email_body);
+          //send email with verification token to user
+          send(user.email, subject, text, email_body);
 
-        res.json(user);
-      })
+          res.json(user);
+        })
         .catch(err => res.json(err));
     })
 }
@@ -99,13 +99,13 @@ exports.user_login = (req, res) => {
   }).then((user) => {
     if (!user) {
       res.status(404).json({
-        email: 'User not found'
+        email: 'Deze gebruiker bestaat niet'
       });
     }
     //check if the user confirmed his account
     if (!user.email_confirmed) {
       res.status(400).json({
-        email: 'Please verify your account'
+        email: 'Verifieer je account'
       });
     }
 
@@ -115,10 +115,10 @@ exports.user_login = (req, res) => {
 
         //create a json web token
         jwt.sign({
-          id: user.id,
-          full_name: user.full_name,
-          email: user.email
-        }, keys.secretOrKey, {
+            id: user.id,
+            full_name: user.full_name,
+            email: user.email
+          }, keys.secretOrKey, {
             expiresIn: 10000
           },
           (err, token) => {
@@ -131,7 +131,7 @@ exports.user_login = (req, res) => {
           })
       } else {
         return res.status(400).json({
-          password: 'Password incorrect'
+          password: 'Het opgegeven wachtwoord is incorrect'
         })
       }
     })
@@ -147,12 +147,12 @@ exports.confirm_user = (req, res, next) => {
   User.update({
     email_confirmed: true
   }, {
-      where: {
-        confirmation_token: req.params.id
-      }
-    }).then(() => {
-      res.json({
-        succes: true
-      });
-    })
+    where: {
+      confirmation_token: req.params.id
+    }
+  }).then(() => {
+    res.json({
+      succes: true
+    });
+  })
 }
