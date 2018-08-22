@@ -41,16 +41,18 @@
     </div>
     <div class="bids">
       <h3>Biedingen:</h3>
-      <div class="bid" *ngFor="let bid of project.bids">
-        <div class="user">
-          <img src="../../../../assets/images/avatar-placeholder.png" alt="">
-          <a>{{bid.user.full_name}}</a>
-          <p>{{bid.created_at | amDateFormat: 'LL'}}</p>
+      <h2 *ngIf="project?.bids?.length == 0">Er zijn nog geen biedingen</h2>
+      <div *ngIf="project?.bids?.length > 0">
+        <div class="bid" *ngFor="let bid of project.bids">
+          <div class="user">
+            <img src="../../../../assets/images/avatar-placeholder.png" alt="">
+            <a>{{bid.user.full_name}}</a>
+            <p>{{bid.created_at | amDateFormat: 'LL'}}</p>
+          </div>
+          <h2>€{{bid.price}}</h2>
+          <hr>
         </div>
-        <h2>€{{bid.price}}</h2>
-        <hr>
       </div>
-
     </div>
   </div>
 </div>

@@ -73,6 +73,9 @@
           color: $lnc-green;
           background: white;
         }
+        @media(max-width: 576px) {
+          display: flex;
+        }
       }
     }
   }

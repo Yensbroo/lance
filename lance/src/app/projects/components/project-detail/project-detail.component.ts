@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../../../core/services/project.service";
 import { IProject } from "../../../core/models/project";
 import { User } from "../../../core/models/user";
+import { Bid } from "../../../core/models/bid";
 
 @Component({
   selector: "app-project-detail",
@@ -18,6 +19,12 @@ export class ProjectDetailComponent implements OnInit {
   user: User[];
   @Input()
   countdownTime: String[];
+  @Output()
+  placeBid = new EventEmitter<Bid>();
 
   ngOnInit() {}
+
+  submit() {
+    this.placeBid.emit();
+  }
 }
