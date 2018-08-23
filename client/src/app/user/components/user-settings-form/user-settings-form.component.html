@@ -1,0 +1,38 @@
+<div class="user-form">
+  <div class="form-header">
+    <div class="wrapper">
+      <h1>Gebruikersinstellingen</h1>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="form-container lnc-shadow">
+      <div class="container-wrapper">
+        <form (submit)="onSubmit()">
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" [(ngModel)]="user.email" name="email">
+            <p *ngIf="error?.email !== ''" class="lnc-error">{{error?.email}}</p>
+          </div>
+          <div class="form-group">
+            <label for="">Oude wachtwoord</label>
+            <input type="password" [(ngModel)]="user.oldPassword" name="oldPassword">
+            <p *ngIf="error?.oldPassword !== ''" class="lnc-error">{{error?.oldPassword}}</p>
+          </div>
+          <div class="form-group">
+            <label for="">Nieuwe wachtwoord</label>
+            <input type="password" [(ngModel)]="user.newPassword" name="newPassword">
+            <p *ngIf="error?.newPassword !== ''" class="lnc-error">{{error?.newPassword}}</p>
+          </div>
+          <div class="form-group">
+            <label for="">Herhaal nieuw wachtwoord</label>
+            <input type="password" [(ngModel)]="user.newPassword2" name="newPassword2">
+            <p *ngIf="error?.newPassword2 !== ''" class="lnc-error">{{error?.newPassword2}}</p>
+          </div>
+          <div class="form-group">
+            <button type="submit">Bewerken</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
