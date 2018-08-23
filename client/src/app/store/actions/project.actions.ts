@@ -9,8 +9,8 @@ export enum ProjectActionTypes {
   SAVE_PROJECT_SUCCESS = "[Project] Save project success",
   PUBLISH_PROJECT = "[Project] Publish project",
   PUBLISH_PROJECT_SUCCESS = "[Project] Publish project success",
-  PLACE_BID = "[Project] Place bid",
-  PLACE_BID_SUCCESS = "[Project] Place bid success"
+  GET_PROJECTS_USER = "[Project] Get projects user",
+  GET_PROJECTS_USER_SUCCESS = "[Project] Get projects user success"
 }
 
 export class GetProjects implements Action {
@@ -53,6 +53,16 @@ export class PublishProjectSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetProjectsUser implements Action {
+  readonly type = ProjectActionTypes.GET_PROJECTS_USER;
+  constructor(public payload: any) {}
+}
+
+export class GetProjectsUserSuccess implements Action {
+  readonly type = ProjectActionTypes.GET_PROJECTS_USER_SUCCESS;
+  constructor(public payload: any) {}
+}
+
 export type All =
   | GetProjects
   | GetProject
@@ -61,4 +71,6 @@ export type All =
   | SaveProject
   | SaveProjectSuccess
   | PublishProject
-  | PublishProjectSuccess;
+  | PublishProjectSuccess
+  | GetProjects
+  | GetProjectsUserSuccess;

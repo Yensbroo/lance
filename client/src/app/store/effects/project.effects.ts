@@ -14,7 +14,9 @@ import {
   SaveProject,
   SaveProjectSuccess,
   PublishProject,
-  PublishProjectSuccess
+  PublishProjectSuccess,
+  GetProjectsUser,
+  GetProjectsUserSuccess
 } from "../actions/project.actions";
 
 import { ProjectService } from "../../core/services/project.service";
@@ -76,6 +78,20 @@ export class ProjectEffects {
             new PublishProjectSuccess(project),
             this.router.navigateByUrl("/opdracht/" + project.id)
           );
+        }),
+        catchError(error => of(new GetErrors({ error })))
+      )
+    )
+  );
+
+  @Effect()
+  GetProjectsUser: Observable<any> = this.actions$.pipe(
+    ofType<GetProjectsUser>(ProjectActionTypes.GET_PROJECTS_USER),
+    map((action: GetProjectsUser) => action.payload),
+    mergeMap(payload =>
+      this.projectService.getProjectsByUser(payload).pipe(
+        map(projects => {
+          return new GetProjectsUserSuccess(projects);
         }),
         catchError(error => of(new GetErrors({ error })))
       )

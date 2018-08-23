@@ -38,4 +38,8 @@ export class ProjectService {
       data
     );
   }
+
+  getProjectsByUser(id) {
+    return this.httpClient.get<IProject>(this.apiUrl + "/projects/user/" + id);
+  }
 }

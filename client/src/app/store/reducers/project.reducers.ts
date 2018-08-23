@@ -33,6 +33,12 @@ export function reducer(state = initialState, action: All) {
         project: action.payload
       };
     }
+    case ProjectActionTypes.GET_PROJECTS_USER_SUCCESS: {
+      return {
+        ...state,
+        projects: action.payload
+      };
+    }
     default: {
       return state;
     }
