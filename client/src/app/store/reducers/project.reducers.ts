@@ -12,15 +12,25 @@ export function reducer(state = initialState, action: All) {
     case ProjectActionTypes.GET_PROJECTS_SUCCESS: {
       return {
         ...state,
-        projects: action.payload,
-        error: null
+        projects: action.payload
       };
     }
     case ProjectActionTypes.GET_PROJECT_SUCCESS: {
       return {
         ...state,
-        project: action.payload,
-        error: null
+        project: action.payload
+      };
+    }
+    case ProjectActionTypes.SAVE_PROJECT_SUCCESS: {
+      return {
+        ...state,
+        project: action.payload
+      };
+    }
+    case ProjectActionTypes.PUBLISH_PROJECT_SUCCESS: {
+      return {
+        ...state,
+        project: action.payload
       };
     }
     default: {
@@ -37,8 +47,3 @@ export const getProjects = createSelector(
   getProjectState,
   (state: ProjectState) => state
 );
-
-// export const getProject = createSelector(
-//   getProjectState,
-//   (state: ProjectState) => state.project
-// );

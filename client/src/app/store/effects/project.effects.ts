@@ -10,7 +10,11 @@ import {
   GetProjects,
   GetProject,
   GetProjectsSuccess,
-  GetProjectSuccess
+  GetProjectSuccess,
+  SaveProject,
+  SaveProjectSuccess,
+  PublishProject,
+  PublishProjectSuccess
 } from "../actions/project.actions";
 
 import { ProjectService } from "../../core/services/project.service";
@@ -27,7 +31,7 @@ export class ProjectEffects {
         .pipe(
           map(
             data => new GetProjectsSuccess(data),
-            catchError(err => of(new GetErrors({ message: err })))
+            catchError(err => of(new GetErrors(err)))
           )
         )
     )
@@ -40,7 +44,40 @@ export class ProjectEffects {
     mergeMap(id =>
       this.projectService.getProjectById(id).pipe(
         map(data => new GetProjectSuccess(data)),
-        catchError(err => of(new GetErrors({ message: err })))
+        catchError(err => of(new GetErrors(err)))
+      )
+    )
+  );
+
+  @Effect()
+  AddAndSaveProject: Observable<any> = this.actions$.pipe(
+    ofType<SaveProject>(ProjectActionTypes.SAVE_PROJECT),
+    map((action: SaveProject) => action.payload),
+    mergeMap(payload =>
+      this.projectService.createAndSaveProject(payload).pipe(
+        map(project => {
+          return (
+            new SaveProjectSuccess(project),
+            this.router.navigateByUrl("/opdracht/" + project.id)
+          );
+        }),
+        catchError(error => of(new GetErrors({ error })))
+      )
+    )
+  );
+  @Effect()
+  AddAndPublishProject: Observable<any> = this.actions$.pipe(
+    ofType<PublishProject>(ProjectActionTypes.PUBLISH_PROJECT),
+    map((action: PublishProject) => action.payload),
+    mergeMap(payload =>
+      this.projectService.createAndPublishProject(payload).pipe(
+        map(project => {
+          return (
+            new PublishProjectSuccess(project),
+            this.router.navigateByUrl("/opdracht/" + project.id)
+          );
+        }),
+        catchError(error => of(new GetErrors({ error })))
       )
     )
   );
@@ -49,6 +86,6 @@ export class ProjectEffects {
     private actions$: Actions,
     private projectService: ProjectService,
     private activeRoute: ActivatedRoute,
-    private route: Router
+    private router: Router
   ) {}
 }

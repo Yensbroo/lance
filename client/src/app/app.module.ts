@@ -36,6 +36,8 @@ import { CategoriesComponent } from "./home/categories/categories.component";
 import { environment } from "../environments/environment.prod";
 import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./core/services/project.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LncHttpInterceptor } from "./authentication/http.interceptor";
 
 @NgModule({
   declarations: [
@@ -61,7 +63,15 @@ import { ProjectService } from "./core/services/project.service";
     }),
     EffectsModule.forRoot([AuthEffects, ProjectEffects])
   ],
-  providers: [AuthenticationService, ProjectService],
+  providers: [
+    AuthenticationService,
+    ProjectService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LncHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

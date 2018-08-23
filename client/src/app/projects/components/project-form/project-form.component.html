@@ -10,37 +10,49 @@
     </div>
     <form action="">
       <div class="form-group">
-        <label for="">Kies een goede titel voor je project</label>
-        <p>Geef een goede titel die beschrijft naar wie of wat je op zoek bent</p>
-        <input type="text">
+        <label for="title">Kies een goede titel voor je project</label>
+        <p class="form-descr">Geef een goede titel die beschrijft naar wie of wat je op zoek bent</p>
+        <input type="text" [(ngModel)]="project.title" name="title" required>
+        <p *ngIf="error?.title !== ''" class="lnc-error">{{error?.title}}</p>
       </div>
       <div class="form-group">
         <label for="">In welke categorie hoort dit project?</label>
         <br>
-        <select name="" id="">
+        <select [(ngModel)]="project.category_id" name="category_id">
           <option value="">Kies een categorie...</option>
+          <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
         </select>
+        <p *ngIf="error?.category_id !== ''" class="lnc-error">{{error?.category_id}}</p>
+
+      </div>
+      <div class="form-group">
+        <label for="">Wanneer gaat dit project van start?</label>
+        <input type="datetime-local" name="project_start" [(ngModel)]="project.project_start">
+        <p *ngIf="error?.project_start !== ''" class="lnc-error">{{error?.project_start}}</p>
       </div>
       <div class="form-group">
         <label for="">Tot wanneer kunnen freelancers bieden op dit project?</label>
-        <input type="datetime-local" name="" id="">
+        <input type="datetime-local" name="project_end" [(ngModel)]="project.project_end">
+        <p *ngIf="error?.project_end !== ''" class="lnc-error">{{error?.project_end}}</p>
       </div>
       <div class="form-group">
-        <label for="">Wat is het budget?</label>
-        <p>Hoeveel zou je willen geven om dit project tot een goed einde te brengen?</p>
-        <input type="number" name="" id="">
+        <label for="budget">Wat is het budget?</label>
+        <p class="form-descr">Hoeveel zou je willen geven om dit project tot een goed einde te brengen?</p>
+        <input type="number" name="budget" [(ngModel)]="project.budget">
+        <p *ngIf="error?.budget !== ''" class="lnc-error">{{error?.budget}}</p>
       </div>
       <div class="form-group">
-        <label for="">
+        <label for="body">
           Beschrijf je project
         </label>
-        <p>Probeer duidelijk te beschrijven wat het project inhoudt en wat je verwacht</p>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <p class="form-descr">Probeer duidelijk te beschrijven wat het project inhoudt en wat je verwacht</p>
+        <textarea name="body" [(ngModel)]="project.body"></textarea>
+        <p *ngIf="error?.body !== ''" class="lnc-error">{{error?.body}}</p>
       </div>
       <div class="form-group">
         <p>Als je het project nog niet online wil zetten, kan je het opslaan en pas later publiceren</p>
-        <button class="save">Opslaan</button>
-        <button>Publiceren</button>
+        <button class="save" (click)="onSave()">Opslaan</button>
+        <button (click)="onPublish()">Publiceren</button>
       </div>
     </form>
   </div>

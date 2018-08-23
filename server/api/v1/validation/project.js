@@ -10,7 +10,6 @@ module.exports = function validateProjectInput(data) {
   data.category_id = !isEmpty(data.category_id) ? data.category_id : "";
   data.project_start = !isEmpty(data.project_start) ? data.project_start : "";
   data.project_end = !isEmpty(data.project_end) ? data.project_end : "";
-  data.project_start = !isEmpty(data.project_start) ? data.project_start : "";
 
   if (!Validator.isLength(data.title, {
       min: 10,
@@ -23,9 +22,13 @@ module.exports = function validateProjectInput(data) {
     errors.title = "Een titel is verplicht";
   }
 
-  if (Validator.isEmpty(data.category_id)) {
-    errors.category_id = "Een categorie is verplicht";
-  }
+  // if (Validator.isEmpty(data.category_id)) {
+  //   errors.category_id = "Een categorie is verplicht";
+  // }
+
+  // if (!Validator.isInt(data.category_id)) {
+  //   errors.category_id = "Je categorie moet een getal zijn"
+  // }
 
   if (!Validator.isLength(data.body, {
       min: 50,
@@ -38,13 +41,13 @@ module.exports = function validateProjectInput(data) {
     errors.body = "Een beschrijving is verplicht";
   }
 
-  if (!Validator.isInt(data.budget)) {
-    errors.budget = "Je budget moet een getal zijn"
-  }
+  // if (!Validator.isInt(data.budget)) {
+  //   errors.budget = "Je budget moet een getal zijn"
+  // }
 
-  if (Validator.isEmpty(data.budget)) {
-    errors.budget = "Een budget is verplicht"
-  }
+  // if (Validator.isEmpty(data.budget)) {
+  //   errors.budget = "Een budget is verplicht"
+  // }
 
   if (Validator.isEmpty(data.project_start)) {
     errors.project_start = "Een start datum is verplicht";

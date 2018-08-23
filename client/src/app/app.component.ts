@@ -22,7 +22,7 @@ export class AppComponent {
   user: Observable<any>;
 
   constructor(private store: Store<AppState>, private router: Router) {
-    this.getState = this.store.pipe(select(fromReducer.getAuth));
+    this.getState = store.select(fromReducer.getAuth);
   }
 
   ngOnInit() {
@@ -33,6 +33,11 @@ export class AppComponent {
           this.user = user.user;
           this.isAuthenticated = user.isAuthenticated;
         });
+      });
+    } else {
+      this.getState.subscribe(user => {
+        this.user = user.user;
+        this.isAuthenticated = user.isAuthenticated;
       });
     }
   }

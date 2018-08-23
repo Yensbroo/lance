@@ -28,5 +28,14 @@ export class ProjectService {
     );
   }
 
-  createProject() {}
+  createAndSaveProject(data) {
+    return this.httpClient.post<IProject>(this.apiUrl + "/projects/save", data);
+  }
+
+  createAndPublishProject(data) {
+    return this.httpClient.post<IProject>(
+      this.apiUrl + "/projects/publish",
+      data
+    );
+  }
 }
