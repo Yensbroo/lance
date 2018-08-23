@@ -8,7 +8,9 @@ export enum ProjectActionTypes {
   SAVE_PROJECT = "[Project] Save project",
   SAVE_PROJECT_SUCCESS = "[Project] Save project success",
   PUBLISH_PROJECT = "[Project] Publish project",
-  PUBLISH_PROJECT_SUCCESS = "[Project] Publish project success"
+  PUBLISH_PROJECT_SUCCESS = "[Project] Publish project success",
+  PLACE_BID = "[Project] Place bid",
+  PLACE_BID_SUCCESS = "[Project] Place bid success"
 }
 
 export class GetProjects implements Action {

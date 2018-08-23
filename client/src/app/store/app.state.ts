@@ -1,11 +1,13 @@
 import { IProject } from "../core/models/project";
 import { User } from "../core/models/user";
 import { Error } from "../core/models/error";
+import { Bid } from "../core/models/bid";
 
 export interface AppState {
   authState: AuthState;
   projectState: ProjectState;
   errorState: ErrorState;
+  bidState: BidState;
 }
 
 export interface ProjectState {
@@ -21,4 +23,8 @@ export interface AuthState {
 
 export interface ErrorState {
   message: Error[];
+}
+
+export interface BidState {
+  bids: Bid[];
 }

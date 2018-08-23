@@ -11,11 +11,13 @@ import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./authentication/register/register.component";
 import { RegisteredComponent } from "./authentication/registered/registered.component";
 import { CreateProjectPageComponent } from "./projects/pages/create-project-page/create-project-page.component";
+import { UserSettingsPageComponent } from "./user/pages/user-settings-page/user-settings-page.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "opdrachten", component: ProjectsPageComponent },
   { path: "maakopdracht", component: CreateProjectPageComponent },
+  { path: "gebruiker", component: UserSettingsPageComponent },
   { path: "opdracht/:id", component: ProjectPageComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },

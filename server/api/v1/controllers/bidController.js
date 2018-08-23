@@ -52,7 +52,7 @@ exports.create_bid = (req, res) => {
           user_id: req.user.id,
           price: req.body.price
         }).then((bid) => {
-          res.json(bid)
+          res.json(project);
         })
         .catch(err => res.json(err));
     }

@@ -31,6 +31,12 @@ export function reducer(state = initialState, action: All): AuthState {
         user: action.payload
       };
     }
+    case AuthActionTypes.UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload
+      };
+    }
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }

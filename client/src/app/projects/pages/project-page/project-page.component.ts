@@ -11,8 +11,12 @@ import "moment/locale/nl-be";
 import "moment-precise-range-plugin";
 import * as fromProjectReducer from "../../../store/reducers/project.reducers";
 import * as fromAuthReducer from "../../../store/reducers/auth.reducers";
+import * as fromBidReducer from "../../../store/reducers/bid.reducers";
 import { ProjectActionTypes } from "../../../store/actions/project.actions";
 import { User } from "../../../core/models/user";
+import { Bid } from "../../../core/models/bid";
+import { BidActionTypes } from "../../../store/actions/bid.actions";
+import { resolve } from "url";
 
 @Component({
   selector: "app-project-page",
@@ -26,10 +30,12 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   getUser: Observable<any>;
   isAuthenticated: boolean;
   user: User[];
+  bids: Bid;
   countdownTime: String;
   counter$: Observable<number>;
   subTimer: Subscription;
   projectEnd: number;
+  getBids: Observable<any>;
 
   constructor(
     private projectService: ProjectService,
@@ -38,11 +44,14 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   ) {
     this.getProject = store.select(fromProjectReducer.getProjects);
     this.getUser = store.select(fromAuthReducer.getAuth);
+    this.getBids = store.select(fromBidReducer.getBids);
   }
 
   ngOnInit() {
     this.setUser();
     this.loadProject();
+    this.loadBids();
+    this.setBids();
     this.setProject();
   }
 
@@ -63,6 +72,23 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
         payload: this.route.snapshot.params["id"]
       });
       resolve();
+    });
+  }
+
+  loadBids() {
+    return new Promise((resolve, reject) => {
+      this.store.dispatch({
+        type: BidActionTypes.GET_BIDS,
+        payload: this.route.snapshot.params["id"]
+      });
+      resolve();
+    });
+  }
+
+  setBids() {
+    this.getBids.subscribe(bids => {
+      console.log(bids);
+      this.bids = bids;
     });
   }
 

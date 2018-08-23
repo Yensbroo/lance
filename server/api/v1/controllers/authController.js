@@ -14,6 +14,7 @@ const PassReset = require('../models').password_resets;
  */
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const validateUserInput = require('../validation/user');
 
 /**
  * Utilities
@@ -154,5 +155,49 @@ exports.confirm_user = (req, res, next) => {
     res.json({
       succes: true
     });
+  })
+}
+
+// Update user
+exports.update_user = (req, res) => {
+  const {
+    errors,
+    isValid
+  } = validateUserInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const userFields = req.body;
+  console.log(userFields)
+  User.findOne({
+    where: {
+      id: req.user.id
+    }
+  }).then((user) => {
+    if (user) {
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(userFields.newPassword, salt, (err, hash) => {
+          if (err) throw err;
+          userFields.newPassword = hash
+          bcrypt.compare(userFields.oldPassword, user.password).then(isMatch => {
+            if (isMatch) {
+              user.update({
+                email: userFields.email,
+                password: userFields.newPassword
+              }).then((user => res.json(user)))
+            } else {
+              errors.oldPassword = "Je oude wachtwoord is niet correct"
+              return res.status(400).json(errors);
+            }
+          })
+        })
+      })
+    } else {
+      res.status(404).json({
+        noUser: "Geen gebruiker gevonden"
+      })
+    }
   })
 }

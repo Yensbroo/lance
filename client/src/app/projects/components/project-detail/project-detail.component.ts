@@ -19,12 +19,8 @@ export class ProjectDetailComponent implements OnInit {
   user: User[];
   @Input()
   countdownTime: String[];
-  @Output()
-  placeBid = new EventEmitter<Bid>();
 
   ngOnInit() {}
 
-  submit() {
-    this.placeBid.emit();
-  }
+  placeBid() {}
 }

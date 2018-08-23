@@ -12,7 +12,9 @@ import {
   Register,
   RegisterSuccess,
   CurrentUser,
-  Logout
+  Logout,
+  UpdateUser,
+  UpdateUserSuccess
 } from "../actions/auth.actions";
 
 import { AuthenticationService } from "../../core/services/authentication.service";
@@ -69,6 +71,22 @@ export class AuthEffects {
     tap(() => {
       localStorage.removeItem("token");
     })
+  );
+
+  @Effect()
+  UpdateUser: Observable<any> = this.actions$.pipe(
+    ofType<UpdateUser>(AuthActionTypes.UPDATE_USER),
+    map((action: UpdateUser) => action.payload),
+    mergeMap(payload =>
+      this.authService.updateUser(payload).pipe(
+        map(user => {
+          return (
+            new UpdateUserSuccess(user), this.router.navigateByUrl("/gebruiker")
+          );
+        }),
+        catchError(error => of(new GetErrors({ error })))
+      )
+    )
   );
 
   constructor(

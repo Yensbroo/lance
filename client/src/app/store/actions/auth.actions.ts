@@ -8,6 +8,8 @@ export enum AuthActionTypes {
   REGISTER_SUCCESS = "[Auth] Register Success",
   REGISTER_FAILURE = "[Auth] Register Failure",
   CURRENT_USER = "[Auth] Current User",
+  UPDATE_USER = "[Auth] Update User",
+  UPDATE_USER_SUCCESS = "[Auth] Update user success",
   LOGOUT = "[Auth] Logout"
 }
 
@@ -40,10 +42,22 @@ export class CurrentUser implements Action {
   constructor(public payload: any) {}
 }
 
+export class UpdateUser implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER;
+  constructor(public payload: any) {}
+}
+
+export class UpdateUserSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_SUCCESS;
+  constructor(public payload: any) {}
+}
+
 export type All =
   | Login
   | LoginSuccess
   | Register
   | RegisterSuccess
   | CurrentUser
-  | Logout;
+  | Logout
+  | UpdateUser
+  | UpdateUserSuccess;

@@ -23,4 +23,12 @@ module.exports = function (passport) {
 
 
   passport.use(jwtStrategy);
+
+  passport.serializeUser((user, done) => {
+    done(null, user);
+  });
+
+  passport.deserializeUser((user, done) => {
+    done(null, user);
+  })
 }

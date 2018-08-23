@@ -3,12 +3,14 @@ import { AppState } from "../app.state";
 import * as fromProjectReducer from "./project.reducers";
 import * as fromAuthReducer from "./auth.reducers";
 import * as fromErrorReducer from "./error.reducers";
+import * as fromBidReducer from "./bid.reducers";
 import { environment } from "../../../environments/environment";
 
 export const reducers: ActionReducerMap<AppState> = {
   authState: fromAuthReducer.reducer,
   projectState: fromProjectReducer.reducer,
-  errorState: fromErrorReducer.reducer
+  errorState: fromErrorReducer.reducer,
+  bidState: fromBidReducer.reducer
 };
 
 export function logger(

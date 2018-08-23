@@ -5,4 +5,7 @@ export class User {
   password2: String;
   full_name: String;
   token: String;
+  oldPassword: String;
+  newPassword: String;
+  newPassword2: String;
 }

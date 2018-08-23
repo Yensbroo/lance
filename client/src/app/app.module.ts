@@ -38,6 +38,8 @@ import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./core/services/project.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LncHttpInterceptor } from "./authentication/http.interceptor";
+import { UserModule } from "./user/user.module";
+import { BidsService } from "./core/services/bids.service";
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { LncHttpInterceptor } from "./authentication/http.interceptor";
     ProjectsModule,
     FormsModule,
     AuthenticationModule,
+    UserModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -66,6 +69,7 @@ import { LncHttpInterceptor } from "./authentication/http.interceptor";
   providers: [
     AuthenticationService,
     ProjectService,
+    BidsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LncHttpInterceptor,

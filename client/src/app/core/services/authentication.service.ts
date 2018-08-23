@@ -37,6 +37,10 @@ export class AuthenticationService {
     });
   }
 
+  updateUser(data) {
+    return this.http.post<User>(this.apiUrl + "/user", data);
+  }
+
   loggedIn() {
     let jwtHelper = new JwtHelperService();
     const token = localStorage.getItem("id_token");

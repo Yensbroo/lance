@@ -1,0 +1,47 @@
+.user-form {
+  margin-top: 65px;
+  .wrapper {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .form-header {
+    background: $lnc-green;
+    height: 200px;
+    h1 {
+      color: white;
+      padding-top: 92px;
+      text-align: center;
+    }
+  }
+  .form-container {
+    background: white;
+    margin-top: -40px;
+    margin-bottom: 40px;
+    .container-wrapper {
+      width: 70%;
+      margin: 0 auto;
+      form {
+        padding: 40px 0;
+        .form-group {
+          margin-bottom: 20px;
+          label {
+            font-weight: bold;
+            color: $lnc-green;
+          }
+          input {
+            margin-top: 15px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 576px) {
+  .user-form {
+    .wrapper {
+      width: 95%;
+    }
+  }
+}

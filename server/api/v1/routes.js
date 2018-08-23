@@ -27,6 +27,12 @@ const reviewController = require('./controllers/reviewController');
 router.post('/register', authController.create_user);
 router.post('/login', authController.user_login);
 router.post('/verify/:id', authController.confirm_user);
+router.post('/user', authenticate, authController.update_user);
+
+/**
+ * user
+ */
+
 
 /**
  * Password resets
